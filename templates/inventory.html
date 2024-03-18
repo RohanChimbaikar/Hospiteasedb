@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="/static/invent.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Inventory Management</h1>
+
+        <!-- Form to add new product -->
+        <form action="/add_product/" method="post">
+            {% csrf_token %}
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description"></textarea><br>
+
+
+            <label for="quantity">Quantity:</label><br>
+            <input type="text" id="quantity" name="quantity"><br>
+
+            <button type="submit">Add Product</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over products -->
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.date_added }}</td>
+                        <td>
+                            <form id="useProductForm" method="post" action="{% url 'use_product' product.id %}">
+                                {% csrf_token %}
+                                <label for="useQuantity">Use Quantity:</label>
+                                <input type="number" id="useQuantity" name="useQuantity" min="1" required>
+                                <button type="submit">Use</button>
+                            </form>
+                            
+                            <!-- Edit button -->
+                            
+                            <!-- Delete button -->
+                            <form action="{% url 'delete_product' product.id %}" method="post" class="delete-form">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete" class="delete-button" onclick="return confirm('Are you sure you want to delete this product?')">
+                            </form>
+                        </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+    <script>function openEditDialog() {
+        document.getElementById('editDialog').style.display = 'block';
+      }
+      
+      function closeEditDialog() {
+        document.getElementById('editDialog').style.display = 'none';
+      }
+      
+      function saveChanges() {
+        // Get data from the form
+        var name = document.getElementById('editName').value;
+        var description = document.getElementById('editDescription').value;
+        var quantity = document.getElementById('editQuantity').value;
+      
+        // Perform actions to save changes (e.g., send data to server)
+        // Here, you can use AJAX to send the data to your Django backend
+        
+        // Close the dialog box
+        closeEditDialog();
+      }
+      </script>  
+</body>
+</html>

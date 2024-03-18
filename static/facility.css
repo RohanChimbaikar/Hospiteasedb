@@ -1,0 +1,148 @@
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+  }
+
+  /* CSS for header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a5e6f2;
+    font-size: 23px;
+    
+    
+  }
+
+  #logo {
+    display: block;
+    width: 230px; 
+    height: 80px; 
+    margin-right: 20px;
+}
+/* 
+  .header .logo {
+    font-size: 25px;
+    font-family: 'Sriracha', cursive;
+    color: #000;
+    text-decoration: none;
+    margin-left: 30px;
+  } */
+
+  .nav-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #a5e6f2;
+
+    margin-right: 40px;
+  }
+
+  .nav-items a {
+    text-decoration: none;
+    color: #000000;
+    padding: 35px;
+  }
+
+  /* CSS for facility cards */
+  .box{
+    display: flex;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    flex-wrap: wrap;  
+  }
+  .card{
+    display: flex;
+    height: 400px;
+    width: 300px;
+    width: 4px solid black;
+    margin: 30px 30px;
+  
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .card:hover{  
+    display: flex;
+    transform: scale(1.1,1.1);
+    transition: 0.5s ease-in;
+    background-color: aliceblue;
+   
+  }
+
+  .img{
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .title{
+    padding: 10px;
+    text-align: center;
+  }
+  .subtitle{
+    padding: 0px 20px;
+  }
+
+  .but{
+    height: 40px;
+    width:60%;
+    background-color: #a5e6f2;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    margin: auto;
+    padding: 0px 10px;
+    margin-bottom: 20px;
+  }
+  .but:hover{
+    border: 2px solid rgb(143, 178, 194);
+
+    
+  }
+
+
+  
+   /* CSS for footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a5e6f2;
+    padding: 40px 80px;
+    font-size: 22px;
+  }
+
+  .footer .copy {
+    color: #000000;
+  }
+
+  .bottom-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+  }
+
+  .bottom-links .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .bottom-links .links span {
+    font-size: 20px;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+  .color{
+    background-color: #a5e6f2;
+  }
+
+  .bottom-links .links a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 20px;
+  }

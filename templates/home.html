@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/icon4.png" type="image/png">
+
+  <title>HomePage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/home.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    h1 {
+    color: #13266C;
+  }
+  p {
+    color: #323743;
+  }
+  /* .highlight {
+    font-weight: bold;
+  } */
+  .mission {
+    /* background-color: #f2f2f2; */
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .show{
+  margin-left: 55px;
+}
+.move{
+  margin-left: 75%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.profile-menu {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    font-weight: bolder;
+    font-size: 1.1rem;
+    color: #921919;
+  font-size:larger;
+    
+}
+.nav-link{
+  color: #921919;
+  font-size:larger;
+
+}
+.container-fluid{
+  height: 82px;
+  
+}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <!-- <header class="header">
+    <a href="/templates/home.html"><img id="logo" src="../static/Logo.png" alt="Logo"></a>
+    
+    <nav class="nav-items">
+      <a href="/templates/home.html">Home</a>
+      <a href="/templates/facility.html">Facilities</a>
+      <a href="/templates/about.html">About Us</a>
+      <a href="/templates/Login_inst.html">Login</a>
+    </nav>
+  </header> -->
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/templates/home.html" style="font-weight: 700; margin-left: 32px;"><img src="/static/HospitEase_transparent.png" height="120px"> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto move">
+              <li class="nav-item" >
+                  <a class="nav-link" href="/templates/home.html"">Home</a>
+              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/templates/facility.html">Facility</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/templates/about.html">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mr-0 mb-lg-0 profile-menu"> 
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="profile-pic mr-0">
+                    {% if request.user.profile.avatar %}
+                        <img src="{{ avatar_url }}" alt="Profile Picture">
+                    {% else %}
+                        <!-- Provide a default image or a placeholder if the user does not have an avatar -->
+                        <img src="/media/profile_pictures/avatar.jpg" alt="Default Avatar">
+                    {% endif %}
+                </div>
+                
+               <!-- You can also use icon as follows: -->
+                 <!--  <i class="fas fa-user"></i> -->
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <!-- Conditionally render login/logout button -->
+                    {% if user.is_authenticated %}
+                        <!-- Display user's name or any other info -->
+                        <a class="dropdown-item" href="/logout_usr"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                    {% else %}
+                        <a class="dropdown-item" href="/templates/Login_inst.html"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a>
+                    {% endif %}
+                </li>
+                
+                  <!-- <li><a class="dropdown-item" href="/templates/Login_inst.html"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a></li>
+                  <li><a class="dropdown-item" href="/logout_usr"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li> -->
+                </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+  <main>
+    <div class="intro">
+      <h1>HospitEase</h1>
+      <p class="typewriter" style="font-family: 'Poppins','sans-serif';">"Where Health Meets Hope"</p>
+      <a href="/templates/Login.html"><button>Book An Appointment</button></a>
+    </div>
+    <div class="achievements">
+        <div class="work">
+            <i class="fas fa-calendar-days" style="color: #921919;"></i>
+            <p class="work-heading">Schedule</p>
+            <p class="work-text">Sundays - 9am-3pm<br>
+                Saturdays - 9am-6pm<br>
+                Weekdays - 9am-9pm</div>
+      <div class="work">
+        <i class="fas fa-atom" style="color: #921919;"></i>
+        <p class="work-heading">Events</p>
+        <p class="work-text">7-Feb:Blood Donation Drive <br>
+            9-Feb:Free Physiotherapy Lessions <br>
+            12-Feb:Free eye checkup for kids <br>
+        </div>
+    </div>
+    <div class="about-me">
+      <div class="about-me-text">
+        <h1 style="color: #AB2848;">Welcome to HospitEase</h1>
+  <div class="mission">
+    <p><span class="highlight">HospitEase</span> is a leading healthcare institution committed to providing exceptional medical services and compassionate care to our community. With a team of dedicated and skilled healthcare professionals, we prioritize patient well-being, offering state-of-the-art facilities and cutting-edge medical technology.</p>
+    <p>Our mission is to deliver personalized and comprehensive healthcare solutions, ensuring the highest standards of safety and excellence. At <span class="highlight">HospitEase</span>, we foster a patient-centric approach, creating a healing environment that emphasizes trust, empathy, and dignity.</p>
+    <p>Join us on the journey towards optimal health and well-being at <span class="highlight">HospitEase</span>, where your health is our priority.</p>
+  </div>
+        <!-- <img src="../static/white.jpeg.jpg" > -->
+    </div>
+      <img src="../static/hospi.jpeg" style="margin-left: 100px; margin-top: 0px; border: 4px solid #921919;">
+    </div>
+  </main>
+  <!-- <footer class="footer">
+    <div class="copy">Quick Links
+      
+    </div>
+    
+    <div class="bottom-links">
+      <div class="links">
+        <span><a href="/templates/home.html">Home</a></span>
+      </div>
+      <div class="links">
+        <span><a href="/templates/about.html">About Us</a></span>
+      </div>
+      <div class="links">
+        <span><a href="/templates/feed.html">Feedback</a></span>
+      </div>
+    </div>
+  </footer> -->
+  <!-- Footer -->
+
+  
+<footer class="text-center text-lg-start bg-body-tertiary text-muted color">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f" style="color: #921919;"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter" style="color: #921919;"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google" style="color: #921919;"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram" style="color: #921919;"></i>
+      </a>
+      <!-- <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a> -->
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>HospitEase
+          </h6>
+          <p>
+           Caring Made Easy
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Facilities
+          </h6>
+          <p>
+            <a href="/templates/vac.html" class="text-reset">Vaccines</a>
+          </p>
+          <p>
+            <a href="/templates/sono.html" class="text-reset">Sonography</a>
+          </p>
+          <p>
+            <a href="/templates/physio.html" class="text-reset">Physiotherapy</a>
+          </p>
+          <p>
+            <a href="" class="text-reset">Cardiology</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="/templates/about.html" class="text-reset">About Us</a>
+          </p>
+          <p>
+            <a href="/templates/Login.html" class="text-reset">Login</a>
+          </p>
+          <p>
+            <a href="/templates/facility.html" class="text-reset">Feedback</a>
+          </p>
+          <p>
+            <a href="/templates//help.html" class="text-reset">Help</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> Mumbai, 4000050 </p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            info@HospitEase.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 91 234 567 88</p>
+          <p><i class="fas fa-print me-3"></i> + 91 234 567 89</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2024 Copyright:
+    <a class="text-reset fw-bold" href="/templates/home.html">HospitEase</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
+</head>
+</body>
+
+</html>

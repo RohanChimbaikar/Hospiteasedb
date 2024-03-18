@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="/static/Login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<style>
+    .alert {
+        position: relative;
+        padding: .75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+    }
+    
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+</style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="navbar">
+            <a href="/templates/home.html" class="logo">
+                <img src="/static/Logo.png" alt="HospitEase">       
+            </a>
+            <ul class="links">
+                <li><a href="../templates/home.html">Home</a></li>
+                <li><a href="../templates/about.html">About Us</a></li>
+                <li><a href="../templates/facility.html">Facilities</a></li>
+                <li><a href="../templates/feed.html">FeedBack</a></li>
+            </ul>
+            <a href="../templates/home.html"><button class="login-btn">Back</button></a>
+        </div>
+    </header>
+    
+    
+    <!-- Form -->
+    <div class="form">
+        <span class="material-symbols-outlined">close</span>
+        <div class="form-box">
+            <div class="form-details">
+                <p>Please Login using your personal information </p>
+            </div>
+            <div class="form-content">
+                <h2>LOGIN</h2>
+                <form action="{% url 'stafflog' %}" method="POST">
+                    {% csrf_token %} 
+                    <div class="input-field">
+                        <input type="text" required name="un">
+                        <label>Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" required name="pw">
+                        <label>Password</label>
+                    </div>
+                    <a href="" class="forgot-pass">Forgot Password?</a>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="bottom-link">
+                    Don't have an account?
+                    <a href="/templates/staffreg.html"> Sign Up </a>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    {% if error_message %}
+    <div class="alert alert-danger">{{ error_message }}</div>
+    {% endif %}
+</body>
+</html>

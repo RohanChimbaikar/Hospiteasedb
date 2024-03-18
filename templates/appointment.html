@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/icon4.png" type="image/png">
+
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="/static/appoint.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .selected {
+            background-color: #007bff;
+            color: #000000;
+            font-weight: 600;
+            border-color: #012f60;
+            border-width: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img id="logo" src="/static/Logo.png" alt="Logo">
+        <nav class="nav-items">
+            <a href="/templates/home.html">Home</a>
+            <a href="/templates/appointment.html">Book an appointment</a>
+            <a href="/templates/home.html">Logout</a>
+        </nav>
+    </header>
+    <div>
+        {% if appointment_details %}
+        <div class="success-message">
+            <h3>Appointment Booked Successfully</h3>
+        </div>
+    {% endif %}
+    </div>
+    <div class="container">
+        <h1>Book Appointment+</h1>
+        <form action="{% url 'bookappointment' %}" method="POST" id="appointmentForm" novalidate >
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="doctor">Doctor:</label>
+                <select id="doctor" name="doctor">
+                    <!-- <option value="Dr. Smith">Dr. Smith - Cardiology</option>
+                    <option value="Dr. Shan">Dr. Shan - Vaccines</option>
+                    <option value="Dr. Leo">Dr. Leo - X-Ray</option>
+                    <option value="Dr. Sweety">Dr. Sweety - Physiotherapist</option>
+                    <option value="Dr. Reign">Dr. Reign - Sonography</option>
+                    <option value="Dr. Abriel">Dr. Abriel - Pathologist</option>
+                    <option value="Dr. Jayden">Dr. Jayden - Gynaecology</option>
+                    <option value="Dr. Jaydenc">Dr. Jaydenc - CT Scan</option>
+                    <option value="Dr. Chris">Dr. Chris - Gastroentorology</option>
+                    <option value="Dr. Rachel">Dr. Rachel - Neurology</option>
+                    <option value="Dr. Riccha">Dr. Riccha - MRI</option>
+                    <option value="Dr. Shivangi">Dr. Shivangi - Emergency</option>
+                    <option value="Dr. Millie">Dr. Millie - Pediatrics</option>
+                    <option value="Dr. Nitesh">Dr. Nitesh - Dermatology</option>
+                    <option value="Dr. Fuzail">Dr. Fuzail - Speech Therapy</option> -->
+                    {% for user in doctor_users %}
+                    <option value="{{ user.username }}">{{ user.get_full_name }}</option>
+                    {% endfor %}
+                </select>        
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="form-group">
+                <label for="time">Available Time Slots:</label>
+                {% for time_slot in available_time_slots %}
+                {% if time_slot in accepted_time_slots %}
+                    <button type="button" data-time="{{ time_slot }}" disabled>{{ time_slot }}</button>
+                {% else %}
+                    <button type="button" data-time="{{ time_slot }}">{{ time_slot }}</button>
+                {% endif %}
+            {% endfor %}
+        
+                <label for="selectedTime">Selected Time:</label>
+                <input type="text" id="selectedTime" name="selectedTime" readonly>
+            </div>
+            <input type="submit" value="Book Appointment" name="submit" id="button">
+        </form>
+        
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        document.getElementById("date").addEventListener("change", function() {
+          const today = moment(); // Get today's date
+          const selectedDate = moment(this.value); // Convert selected date to moment object
+          if (selectedDate.isBefore(today)) {
+            this.value = ''; // Clear the input if date is in the past
+            alert("Please select a date in the future or today.");
+          }
+        });
+
+        const timeButtons = document.querySelectorAll('.time-slots button');
+        const selectedTimeInput = document.getElementById('selectedTime');
+
+        timeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove the 'selected' class from all buttons
+                timeButtons.forEach(btn => btn.classList.remove('selected'));
+                
+                // Add the 'selected' class to the clicked button
+                this.classList.add('selected');
+                
+                // Update the hidden input field with the selected time
+                const selectedTime = this.getAttribute('data-time');
+                selectedTimeInput.value = selectedTime;
+            });
+        });
+        document.getElementById("button").addEventListener("click", function(event) {
+    // Get the selected time
+    const selectedTimeInput = document.getElementById('selectedTime');
+    const selectedTime = selectedTimeInput.value;
+
+    // Convert the selected time to a valid format (HH:MM)
+    const formattedTime = moment(selectedTime, ['h:mm A']).format('HH:mm');
+
+    // Update the hidden input field with the formatted time
+    selectedTimeInput.value = formattedTime;
+});
+    </script>
+    
+</body>
+</html>

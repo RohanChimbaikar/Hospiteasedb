@@ -1,0 +1,77 @@
+/* Reset default browser styles */
+html, body, ul, li, h1, h2, p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    background-color: #343a40;
+    padding: 10px 0;
+  }
+  
+  .navbar-brand {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin-right: 30px;
+  }
+  
+  .navbar-toggler {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+  
+  .navbar-toggler:focus {
+    outline: none;
+  }
+  
+  .navbar-nav {
+    list-style-type: none;
+  }
+  
+  .nav-item {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .nav-link.active,
+  .nav-link:hover {
+    color: #ffc107;
+  }
+  
+  /* Section styles */
+  section {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  
+  h2 {
+    color: #343a40;
+    margin-bottom: 10px;
+  }
+  

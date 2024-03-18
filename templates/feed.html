@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1.0"> 
+		<link rel="icon" href="/static/icon4.png" type="image/png">
+
+	<title>Feedback Card</title> 
+	<link rel="stylesheet" href= 
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+	<link rel="stylesheet" href="/static/feed.css"> 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head> 
+
+<body> 
+	<header class="header">
+		<img id="logo" src="/static/Logo.png" alt="Logo">
+		<nav class="nav-items">
+		  <a href="../templates/home.html">Home</a>
+		  <a href="../templates/fac.html">Facilities</a>
+		  <a href="../templates/about.html">About Us</a>
+		  <a href="../templates/Login.html">Login</a>
+		</nav>
+	  </header>
+	<h3>Feedback Form
+	</h3> 
+	<div class="form-box"> 
+		<div class="textup"> 
+			<i class="fa fa-solid fa-clock"></i> 
+			It will only take a minute to fill !! 
+		</div> 
+		<form method="POST" action="{% url 'feed' %}"> 
+			{% csrf_token %}
+			<label for="First Name"> 
+				<i class="fa fa-solid fa-user"></i> 
+				First Name 
+			</label> 
+			<input type="text" id="uname"
+				name="fname" required> 
+                <label for="Last Name"> 
+                    <i class="fa fa-solid fa-user"></i> 
+                    Last Name 
+                </label> 
+                <input type="text" id="uname"
+                    name="lname" required> 
+    
+			<label for="email"> 
+				<i class="fa fa-solid fa-envelope"></i> 
+				Email Address 
+			</label> 
+			<input type="email" id="email"
+				name="em" required> 
+
+			<label> 
+				<i class="fa-solid fa-face-smile"></i> 
+				Are you satisfied with our service? 
+			</label> 
+			<div class="radio-group"> 
+				<input type="radio" id="yes"
+					name="sat" value="Satisfied" checked> 
+				<label for="yes">Yes</label> 
+
+				<input type="radio" id="no"
+					name="sat" value="Not satisfied"> 
+				<label for="no">No</label> 
+			</div> 
+
+			<label for="msg"> 
+				<i class="fa-solid fa-comments"
+				style="margin-right: 3px;"></i> 
+				Additional Feedback: 
+			</label> 
+			<textarea id="msg" name="msg"
+					rows="4" cols="10" required> 
+			</textarea> 
+			<input type="submit" value="Submit" class="btn"> 
+		</form> 
+	</div> 
+</body> 
+
+</html>

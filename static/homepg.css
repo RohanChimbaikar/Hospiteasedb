@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    height: 400px;
+    background-color: #1a76d1;
+    color: #000000;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img{
+    height: 100px;
+}
+#logo {
+    display: block;
+    width: 50px; 
+    height: 50px; 
+    margin-right: 20px;
+}
+
+
+nav {
+    display: flex;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    position: relative; 
+     transition: color 0.3s ease, border-bottom 0.3s ease; /* Adding transition effect */
+        }
+
+
+nav a:hover {
+    color: #ff013c; 
+    border-bottom: 2px solid #ff1e00;
+}
+.about-us div {
+    width: 45%;
+    float: left;
+    line-height: 30px;
+    font-size: 18px;
+  }
+  .about-us h4 {
+    font-size: 22px;
+  }
+  .about-us p {
+    line-height: 42px;
+  }
+  .about-us img {
+    width: 40%;
+    float: left;
+  }
+footer {
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ffffff;
+}
+footer a {
+    text-decoration: none;
+    color: #000000;
+    position: relative;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+footer a:hover {
+    color: #ff0000; 
+    border-bottom: 1px solid #ff0000;
+}
+.slider img {
+    width:100%;
+}
+

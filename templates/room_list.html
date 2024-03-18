@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Room Management</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .available-rooms, .unavailable-rooms {
+            margin-bottom: 40px;
+        }
+        .room-number {
+            font-weight: bold;
+        }
+        .occupy-checkbox {
+            margin: 0;
+            padding: 0;
+        }
+        .occupy-button, .unoccupy-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.occupy-button:hover, .unoccupy-button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hospital Room Management</h1>
+
+        <div class="available-rooms">
+            <h2>Available Rooms</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Room Type</th>
+                       
+                        <th>Floor</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room in available_rooms %}
+                        <tr>
+                            <td class="room-number">{{ room.number }}</td>
+                            <td>{{ room.room_type }}</td>
+                            
+                            <td>{{ room.floor }}</td>
+                            <td>
+                                <form method="post" action="{% url 'occupy_room' room.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="occupy">
+                                    <button type="submit" class="occupy-button">Occupy</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="unavailable-rooms">
+            <h2>Unavailable Rooms</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Room Type</th>
+                        
+                        <th>Floor</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room in unavailable_rooms %}
+                        <tr>
+                            <td class="room-number">{{ room.number }}</td>
+                            <td>{{ room.room_type }}</td>
+                            <td>{{ room.floor }}</td>
+                            <td>
+                                <form method="post" action="{% url 'unoccupy_room' room.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="unoccupy">
+                                    <button type="submit" class="unoccupy-button">Unoccupy</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

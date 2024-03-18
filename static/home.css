@@ -1,0 +1,276 @@
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+  }
+
+  /* CSS for header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a5e6f2;
+    font-size: 23px;
+    
+    
+  }
+
+  #logo {
+    display: block;
+    width: 230px; 
+    height: 80px; 
+    margin-right: 20px;
+}
+/* 
+  .header .logo {
+    font-size: 25px;
+    font-family: 'Sriracha', cursive;
+    color: #000;
+    text-decoration: none;
+    margin-left: 30px;
+  } */
+
+  .nav-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #a5e6f2;
+
+    margin-right: 40px;
+  }
+
+  .nav-items a {
+    text-decoration: none;
+    color: #000000;
+    padding: 35px;
+  }
+
+  /* CSS for main element */
+  .intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 520px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("/static/hospp.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: contain;
+  }
+
+  .intro h1 {
+    font-family: sans-serif;
+    font-size: 60px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .intro p {
+    font-size: 20px;
+    color: #d1d1d1;
+    text-transform: uppercase;
+    margin: 20px 0;
+  }
+
+  .intro button {
+    background-color:#AB2848;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 0px 20px rgba(193, 35, 35, 0.4)
+  }
+  button:hover{
+    background-color: #8D2500;
+    
+    color: whitesmoke;
+    
+    transform: scale(1.1);
+    transition: 0.1s ease-in;
+  }
+
+  .achievements {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 80px;
+  }
+
+  .achievements .work {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .achievements .work i {
+    width: auto;
+    font-size: 50px;
+    color: #333333;
+    border-radius: 50%;
+    border: 2px solid #CE4E57;
+    padding: 12px;
+    
+  }
+
+  .achievements .work .work-heading {
+    font-size: 20px;
+    color: #333333;
+    text-transform: uppercase;
+    margin: 10px 0;
+    font-weight: 700;
+  }
+
+  .achievements .work .work-text {
+    font-size: 15px;
+    color: #585858;
+    margin: 10px 0;
+  }
+
+  .about-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 80px;
+    border-top: 2px solid #eeeeee;
+  }
+
+  .about-me img {
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .about-me-text h2 {
+    font-size: 30px;
+    color: #333333;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .about-me-text p {
+    font-size: 15px;
+    color: #585858;
+    margin: 10px 0;
+  }
+
+  /* CSS for footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a5e6f2;
+    padding: 40px 80px;
+    font-size: 22px;
+  }
+
+  .footer .copy {
+    color: #000000;
+  }
+
+  .bottom-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+  }
+
+  .bottom-links .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .bottom-links .links span {
+    font-size: 20px;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+  .color{
+    background-color: #a5e6f2;
+  }
+
+  .bottom-links .links a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 20px;
+  }
+
+
+
+  /* Typewriter effect */
+
+  .typewriter{
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 25% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
+
+  /* Profile Picture */
+.profile-pic{
+   display: inline-block;
+   vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+   border-radius: 50%;
+   margin-left: 10px;
+}
+
+.profile-pic img{
+   width: 100%;
+   height: auto;
+   object-fit: cover;
+}
+.profile-menu .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+.profile-menu .fa-fw {
+  margin-right: 10px;
+}
+
+.toggle-change::after {
+  border-top: 0;
+  border-bottom: 0.3em solid;
+}
+
+.dropdown-toggle{
+  margin-right: 10px; 
+}
+
+.profile-pic{
+  border-radius: 50%;
+  border: 0.2px solid #8D2500;
+}
+

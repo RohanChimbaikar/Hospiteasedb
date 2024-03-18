@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .map-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+    </style>
+</head>
+<header class="header">
+    <a href="/templates/home.html"><img id="logo" src="../static/Logo.png" alt="Logo"></a>
+    
+    <nav class="nav-items">
+      <a href="/templates/home.html">Home</a>
+      <a href="/templates/facility.html">Facilities</a>
+      <a href="/templates/about.html">About Us</a>
+      <a href="/templates/Login_inst.html">Login</a>
+    </nav>
+  </header>
+  <style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a5e6f2; /* Blue background color */
+    padding: 20px; /* Add padding for spacing */
+  }
+  
+  .nav-items {
+    display: flex;
+    gap: 20px; /* Add space between navigation items */
+  }
+  
+  .nav-items a {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Text color (white) */
+    font-weight: bold; /* Make text bold */
+  }
+  
+  .nav-items a:hover {
+    color: #ccebff; /* Change text color on hover */
+  }
+  
+  #logo {
+    width: 100px; /* Set logo width */
+    height: auto; /* Maintain aspect ratio */
+  }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Contact Number 1:</strong> +91 34561 27890</p>
+                    <p><strong>Contact Number 2:</strong> +91 34561 27890</p>
+                    <p><strong>Email:</strong> help@hospitease.com</p>
+                    <p><strong>Address:</strong> ST Leos Road, Bandra (West), Mumbai, 400050, US</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="map-container">
+                    <h3>Find Us On Maps!</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.162857706755!2d72.82633767373598!3d19.056575952584897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c93fef9c6395%3A0xb5b3366a8730fe4a!2sSt%20Andrew&#39;s%20College%20of%20Arts%2C%20Science%20and%20Commerce!5e0!3m2!1sen!2sin!4v1709134830917!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
