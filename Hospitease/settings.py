@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'room_mgmt',
     'inventory',
     'feedback',
+    'Department'
 ]
 
 MIDDLEWARE = [

@@ -70,8 +70,7 @@ body {
     display: flex;
     transform: scale(1.1,1.1);
     transition: 0.3s ease-in-out;
-    background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%);
-    
+    background-color: #edfffc;    
   }
 
   .img{
