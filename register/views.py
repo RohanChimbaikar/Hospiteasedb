@@ -32,6 +32,7 @@ def register_usr(request):
                 date_of_birth=date_of_birth,
                 gender=gender,
                 phone_number=phone_number,
+                avatar='profile_pictures/avatar.jpg'  # Assuming 'default_avatar.png' is the default profile picture
             )
             
             return redirect('login_user')  # Redirect to login page after successful registration
