@@ -1,276 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/static/icon4.png" type="image/png">
-  <title> 
-    Facilities</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities</title>
+    <link rel="stylesheet" href="/static/facility.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/facility.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-  <header class="header">
-    <a href="/templates/home.html"><img id="logo" src="../static/Logo.png" alt="Logo"></a>
+    <!-- Include your CSS and JavaScript files here -->
+    <style>
+        h1 {
+        color: #13266C;
+      }
+      p {
+        color: #323743;
+      }
+      /* .highlight {
+        font-weight: bold;
+      } */
+      .mission {
+        /* background-color: #f2f2f2; */
+        padding: 20px;
+        border-radius: 15px;
+      }
     
-    <nav class="nav-items">
-      <a href="/templates/home.html">Home</a>
-      <a href="/templates/facility.html">Facilities</a>
-      <a href="/templates/about.html">About Us</a>
-      <a href="/templates/Login_inst.html">Login</a>
-    </nav>
-  </header>
- <div class="box">
-  <div class="card">
-    <img class="img" src="/static/vaccine.jpg" alt="image">
-    <h2 class="title">Vaccines</h2>
-    <p class="subtitle">Elevate your immune defense with our cutting-edge vaccines. Our Vaccine Center is your shield against preventable diseases, offering a range of vaccinations for all ages. From childhood immunizations to travel vaccines, our expert healthcare team ensures your well-being with every shot</p>
-    <button class="but" onclick="window.location.href = '/templates/vac.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/xray.jpg" alt="image">
-    <h2 class="title">X-Ray</h2>
-    <p class="subtitle typewriter">Our state-of-the-art X-ray facility is equipped with the latest technology to provide accurate diagnostic imaging. Our team of experienced radiologists ensures high-quality results and quick turnaround times
-    </p>
-    <button class="but" onclick="window.location.href = '/templates/xray.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/physio.jpg" alt="image">
-    <h2 class="title">Physiotherapy</h2>
-    <p class="subtitle">Our dedicated physiotherapy department focuses on enhancing your well-being through personalized rehabilitation programs. Our skilled physiotherapists use advanced techniques to address various musculoskeletal conditions and improve mobility.    </p>
-    <button class="but" onclick="window.location.href = '/templates/physio.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/Sonography.jpg" alt="image">
-    <h2 class="title">Sonography</h2>
-    <p class="subtitle">Our advanced Sonography department is committed to providing accurate and detailed imaging for diagnostic purposes. Our skilled sonographers utilize cutting-edge technology to perform a wide range of ultrasound examinations with precision and care.</p>
-    <button class="but" onclick="window.location.href = '/templates/sono.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/patho.jpeg" alt="image">
-    <h2 class="title">Pathology</h2>
-    <p class="subtitle">Our Pathology laboratory is dedicated to providing accurate and timely diagnostic testing services. We employ a team of experienced pathologists and use cutting-edge technology to ensure precise and reliable results for various medical conditions.
-    </p>
-    <button class="but" onclick="window.location.href = '/templates/patho.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/mri.jpeg" alt="image">
-    <h2 class="title">MRI</h2>
-    <p class="subtitle">Our MRI facility offers advanced imaging services using state-of-the-art magnetic resonance technology. Our team of skilled radiologists and technicians ensures detailed and high-resolution imaging for accurate diagnosis of various medical conditions.</p>
-    <button class="but" onclick="window.location.href = '/templates/mri.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/ctsly.png" alt="image">
-    <h2 class="title">CT Scan</h2>
-    <p class="subtitle">Our CT Scan facility utilizes cutting-edge technology to provide detailed cross-sectional images for precise diagnostic purposes. Our experienced radiologists and technicians ensure accurate and efficient imaging for a wide range of medical conditions.</p>
-    <button class="but" onclick="window.location.href = '/templates/ct.html';">Learn More</button>
-  </div>
-  <div class="card">
-    <img class="img" src="/static/speech.jpg" alt="image">
-    <h2 class="title">Speech Therapy</h2>
-    <p class="subtitle">Our Speech Therapy Department is dedicated to enhancing communication and improving speech-related challenges. Our team of licensed speech-language pathologists works with individuals of all ages, addressing speech and language disorders, articulation difficulties, voice disorders, and swallowing issues.</p>
-    <button class="but bg-body-primary" onclick="window.location.href = '/templates/speech.html';">Learn More</button>
-  </div>
-  
-  <div class="card">
-    <img class="img" src="/static/cardiology.jpg" alt="image">
-    <h2 class="title">Cardiology</h2>
-    <p class="subtitle">Our Cardiology department is dedicated to providing comprehensive cardiovascular care. Our team of experienced cardiologists and state-of-the-art equipment ensure accurate diagnosis and effective treatment for various heart-related conditions.</p>
-      <button class="but bg-body-primary">Learn More</button>
-    </div>
-  
-  <div class="card">
-    <img class="img" src="/static/neuro.jpg" alt="image">
-    <h2 class="title">Neurology</h2>
-    <p class="subtitle">Our Neurology department specializes in diagnosing and treating a range of neurological disorders, from headaches to complex conditions like epilepsy and stroke. With advanced diagnostic tools and a team of experienced neurologists, we provide personalized care to enhance the well-being of our patients.</p>
-    <button class="but bg-body-primary">Learn More</button>
-  </div>
-
-
-<div class="card">
-  <img class="img" src="/static/gyna.webp" alt="image">
-  <h2 class="title">Gynaecology</h2>
-  <p class="subtitle">Our Gynecology department is dedicated to providing comprehensive and compassionate care for women's reproductive health. Our team of experienced gynecologists and women's health specialists offers a range of services, including routine check-ups, prenatal care, family planning, and gynecological surgeries.
-  </p>
-  <button class="but bg-body-primary">Learn More</button>
-</div>
-
-<div class="card">
-  <img class="img" src="/static/emer.jpg" alt="image">
-  <h2 class="title">Emergency</h2>
-  <p class="subtitle">Our Emergency Department stands as a beacon of immediate care, ready to address critical medical needs 24/7. Staffed with a team of dedicated emergency physicians, skilled nurses, and support staff, we are equipped to handle a wide range of medical emergencies.
-  </p>
-  <button class="but bg-body-primary">Learn More</button>
-</div>
-
-<div class="card">
-  <img class="img" src="/static/icu.avif" alt="image">
-  <h2 class="title">Intensive Care Unit</h2>
-  <p class="subtitle">Our Intensive Care Unit (ICU) is dedicated to providing critical care for patients with severe or life-threatening conditions. Staffed by a highly skilled team of intensivists, nurses, and healthcare professionals, our ICU is equipped with advanced monitoring and life support systems.
-  </p>
-  <button class="but bg-body-primary">Learn More</button>
-</div>
-
-<div class="card">
-  <img class="img" src="/static/pedia.avif" alt="image">
-  <h2 class="title">Pediatrics</h2>
-  <p class="subtitle">Our Pediatrics department is dedicated to providing specialized and compassionate healthcare for infants, children, and adolescents. Our team of experienced pediatricians and pediatric nurses is committed to ensuring the well-being and healthy development of young patients.</p>
-  <button class="but bg-body-primary">Learn More</button>
-</div>
-
-<div class="card">
-  <img class="img" src="/static/gastro.jpg" alt="image">
-  <h2 class="title">Gastroenterology</h2>
-  <p class="subtitle">Our Gastroenterology Department is dedicated to the comprehensive care of digestive system disorders and gastrointestinal issues. Led by experienced gastroenterologists and supported by a skilled medical team, we provide a range of diagnostic and therapeutic services.</p>
-  <button class="but bg-body-primary">Learn More</button>
-</div>
-</div>
-  <!-- <footer class="footer">
-    <div class="copy">Quick Links
+      .show{
+      margin-left: 55px;
+    }
+    .move{
+      margin-left: 75%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .profile-menu {
+        display: flex;
+        align-items: center;
+    }
+    
+    .navbar-nav .nav-link {
+        font-weight: bolder;
+        font-size: 1.1rem;
+        color: #921919;
+      font-size:larger;
+        
+    }
+    .nav-link{
+      color: #921919;
+      font-size:larger;
+    
+    }
+    .container-fluid{
+      height: 82px;
       
-    </div>
-    
-    <div class="bottom-links">
-      <div class="links">
-        <span><a href="/templates/home.html">Home</a></span>
-      </div>
-      <div class="links">
-        <span><a href="/templates/about.html">About Us</a></span>
-      </div>
-      <div class="links">
-        <span><a href="/templates/feed.html">Feedback</a></span>
-      </div>
-    </div>
-  </footer> -->
-  <!-- Footer -->
-<footer class="text-center text-lg-start bg-body-tertiary text-muted color">
-  <!-- Section: Social media -->
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    <!-- Left -->
-    <div class="me-5 d-none d-lg-block">
-      <span>Get connected with us on social networks:</span>
-    </div>
-    <!-- Left -->
+    }
+    .profile-pic{
+   display: inline-block;
+   vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+   border-radius: 50%;
+   margin-left: 10px;
+}
 
-    <!-- Right -->
-    <div>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-google"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <!-- Right -->
-  </section>
-  <!-- Section: Social media -->
+.profile-pic img{
+   width: 100%;
+   height: auto;
+   object-fit: cover;
+}
+.profile-menu .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+.profile-menu .fa-fw {
+  margin-right: 10px;
+}
 
-  <!-- Section: Links  -->
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <!-- Grid row -->
-      <div class="row mt-3">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <!-- Content -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>HospitEase
-          </h6>
-          <p>
-           Caring Made Easy
-          </p>
+.toggle-change::after {
+  border-top: 0;
+  border-bottom: 0.3em solid;
+}
+
+.dropdown-toggle{
+  margin-right: 10px; 
+}
+
+.profile-pic{
+  border-radius: 50%;
+  border: 0.2px solid #8D2500;
+}
+
+
+      </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa;    background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/templates/home.html" style="font-weight: 700; margin-left: 32px;"><img src="/static/HospitEase_transparent.png" height="120px"> </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto move">
+                      <li class="nav-item" >
+                          <a class="nav-link" href="/templates/home.html">Home</a>
+                      </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/templates/facility.html">Facility</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/templates/about.html">About</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mr-0 mb-lg-0 profile-menu"> 
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <div class="profile-pic mr-0">
+                            {% if request.user.profile.avatar %}
+                                <img src="{{ avatar_url }}" alt="Profile Picture">
+                            {% else %}
+                                <!-- Provide a default image or a placeholder if the user does not have an avatar -->
+                                <img src="/media/profile_pictures/avatar.jpg" alt="Default Avatar">
+                            {% endif %}
+                        </div>
+                        
+                      <!-- You can also use icon as follows: -->
+                        <!--  <i class="fas fa-user"></i> -->
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                          <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li>
+                            <!-- Conditionally render login/logout button -->
+                            {% if user.is_authenticated %}
+                                <!-- Display user's name or any other info -->
+                                <a class="dropdown-item" href="/logout_usr"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                            {% else %}
+                                <a class="dropdown-item" href="/templates/Login_inst.html"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a>
+                            {% endif %}
+                        </li>
+                        
+                          <!-- <li><a class="dropdown-item" href="/templates/Login_inst.html"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a></li>
+                          <li><a class="dropdown-item" href="/logout_usr"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li> -->
+                        </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="box" style="margin-left: 300px; ">
+        <div class="card">
+          <img class="img" src="/static/vaccine.jpg" alt="image">
+          <h2 class="title">Vaccines</h2>
+          <p class="subtitle">Elevate your immune defense with our cutting-edge vaccines. Our Vaccine Center is your shield against preventable diseases, offering a range of vaccinations for all ages. From childhood immunizations to travel vaccines, our expert healthcare team ensures your well-being with every shot</p>
+          <button class="but" onclick="window.location.href = '/templates/vac.html';">Learn More</button>
         </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Facilities
-          </h6>
-          <p>
-            <a href="/templates/vac.html" class="text-reset">Vaccines</a>
+        <div class="card">
+          <img class="img" src="/static/xray.jpg" alt="image">
+          <h2 class="title">X-Ray</h2>
+          <p class="subtitle typewriter">Our state-of-the-art X-ray facility is equipped with the latest technology to provide accurate diagnostic imaging. Our team of experienced radiologists ensures high-quality results and quick turnaround times
           </p>
-          <p>
-            <a href="/templates/sono.html" class="text-reset">Sonography</a>
-          </p>
-          <p>
-            <a href="/templates/physio.html" class="text-reset">Physiotherapy</a>
-          </p>
-          <p>
-            <a href="" class="text-reset">Cardiology</a>
-          </p>
+          <button class="but" onclick="window.location.href = '/templates/xray.html';">Learn More</button>
         </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Useful links
-          </h6>
-          <p>
-            <a href="#!" class="text-reset">About Us</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Login</a>
-          </p>
-          <p>
-            <a href="/templates/facility.html" class="text-reset">Feedback</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Help</a>
-          </p>
+        <div class="card">
+          <img class="img" src="/static/physio.jpg" alt="image">
+          <h2 class="title">Physiotherapy</h2>
+          <p class="subtitle">Our dedicated physiotherapy department focuses on enhancing your well-being through personalized rehabilitation programs. Our skilled physiotherapists use advanced techniques to address various musculoskeletal conditions and improve mobility.    </p>
+          <button class="but" onclick="window.location.href = '/templates/physio.html';">Learn More</button>
         </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="fas fa-home me-3"></i> Mumbai, 4000050 US</p>
-          <p>
-            <i class="fas fa-envelope me-3"></i>
-            info@HospitEase.com
-          </p>
-          <p><i class="fas fa-phone me-3"></i> + 91 234 567 88</p>
-          <p><i class="fas fa-print me-3"></i> + 91 234 567 89</p>
+        <div class="card">
+          <img class="img" src="/static/Sonography.jpg" alt="image">
+          <h2 class="title">Sonography</h2>
+          <p class="subtitle">Our advanced Sonography department is committed to providing accurate and detailed imaging for diagnostic purposes. Our skilled sonographers utilize cutting-edge technology to perform a wide range of ultrasound examinations with precision and care.</p>
+          <button class="but" onclick="window.location.href = '/templates/sono.html';">Learn More</button>
         </div>
-        <!-- Grid column -->
+        <div class="card">
+          <img class="img" src="/static/patho.jpeg" alt="image">
+          <h2 class="title">Pathology</h2>
+          <p class="subtitle">Our Pathology laboratory is dedicated to providing accurate and timely diagnostic testing services. We employ a team of experienced pathologists and use cutting-edge technology to ensure precise and reliable results for various medical conditions.
+          </p>
+          <button class="but" onclick="window.location.href = '/templates/patho.html';">Learn More</button>
+        </div>
+        <div class="card">
+          <img class="img" src="/static/mri.jpeg" alt="image">
+          <h2 class="title">MRI</h2>
+          <p class="subtitle">Our MRI facility offers advanced imaging services using state-of-the-art magnetic resonance technology. Our team of skilled radiologists and technicians ensures detailed and high-resolution imaging for accurate diagnosis of various medical conditions.</p>
+          <button class="but" onclick="window.location.href = '/templates/mri.html';">Learn More</button>
+        </div>
+        <div class="card">
+          <img class="img" src="/static/ctsly.png" alt="image">
+          <h2 class="title">CT Scan</h2>
+          <p class="subtitle">Our CT Scan facility utilizes cutting-edge technology to provide detailed cross-sectional images for precise diagnostic purposes. Our experienced radiologists and technicians ensure accurate and efficient imaging for a wide range of medical conditions.</p>
+          <button class="but" onclick="window.location.href = '/templates/ct.html';">Learn More</button>
+        </div>
+        <div class="card">
+          <img class="img" src="/static/speech.jpg" alt="image">
+          <h2 class="title">Speech Therapy</h2>
+          <p class="subtitle">Our Speech Therapy Department is dedicated to enhancing communication and improving speech-related challenges. Our team of licensed speech-language pathologists works with individuals of all ages, addressing speech and language disorders, articulation difficulties, voice disorders, and swallowing issues.</p>
+          <button class="but bg-body-primary" onclick="window.location.href = '/templates/speech.html';">Learn More</button>
+        </div>
+        
+        <div class="card">
+          <img class="img" src="/static/cardiology.jpg" alt="image">
+          <h2 class="title">Cardiology</h2>
+          <p class="subtitle">Our Cardiology department is dedicated to providing comprehensive cardiovascular care. Our team of experienced cardiologists and state-of-the-art equipment ensure accurate diagnosis and effective treatment for various heart-related conditions.</p>
+            <button class="but bg-body-primary">Learn More</button>
+          </div>
+        
+        <div class="card">
+          <img class="img" src="/static/neuro.jpg" alt="image">
+          <h2 class="title">Neurology</h2>
+          <p class="subtitle">Our Neurology department specializes in diagnosing and treating a range of neurological disorders, from headaches to complex conditions like epilepsy and stroke. With advanced diagnostic tools and a team of experienced neurologists, we provide personalized care to enhance the well-being of our patients.</p>
+          <button class="but bg-body-primary">Learn More</button>
+        </div>
+      
+      
+      <div class="card">
+        <img class="img" src="/static/gyna.webp" alt="image">
+        <h2 class="title">Gynaecology</h2>
+        <p class="subtitle">Our Gynecology department is dedicated to providing comprehensive and compassionate care for women's reproductive health. Our team of experienced gynecologists and women's health specialists offers a range of services, including routine check-ups, prenatal care, family planning, and gynecological surgeries.
+        </p>
+        <button class="but bg-body-primary">Learn More</button>
       </div>
-      <!-- Grid row -->
-    </div>
-  </section>
-  <!-- Section: Links  -->
+      
+      <div class="card">
+        <img class="img" src="/static/emer.jpg" alt="image">
+        <h2 class="title">Emergency</h2>
+        <p class="subtitle">Our Emergency Department stands as a beacon of immediate care, ready to address critical medical needs 24/7. Staffed with a team of dedicated emergency physicians, skilled nurses, and support staff, we are equipped to handle a wide range of medical emergencies.
+        </p>
+        <button class="but bg-body-primary">Learn More</button>
+      </div>
+      
+      <div class="card">
+        <img class="img" src="/static/icu.avif" alt="image">
+        <h2 class="title">Intensive Care Unit</h2>
+        <p class="subtitle">Our Intensive Care Unit (ICU) is dedicated to providing critical care for patients with severe or life-threatening conditions. Staffed by a highly skilled team of intensivists, nurses, and healthcare professionals, our ICU is equipped with advanced monitoring and life support systems.
+        </p>
+        <button class="but bg-body-primary">Learn More</button>
+      </div>
+      
+      <div class="card">
+        <img class="img" src="/static/pedia.avif" alt="image">
+        <h2 class="title">Pediatrics</h2>
+        <p class="subtitle">Our Pediatrics department is dedicated to providing specialized and compassionate healthcare for infants, children, and adolescents. Our team of experienced pediatricians and pediatric nurses is committed to ensuring the well-being and healthy development of young patients.</p>
+        <button class="but bg-body-primary">Learn More</button>
+      </div>
+      
+      <div class="card">
+        <img class="img" src="/static/gastro.jpg" alt="image">
+        <h2 class="title">Gastroenterology</h2>
+        <p class="subtitle">Our Gastroenterology Department is dedicated to the comprehensive care of digestive system disorders and gastrointestinal issues. Led by experienced gastroenterologists and supported by a skilled medical team, we provide a range of diagnostic and therapeutic services.</p>
+        <button class="but bg-body-primary">Learn More</button>
+      </div>
+      </div>
 
-  <!-- Copyright -->
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2024 Copyright:
-    <a class="text-reset fw-bold" href="/templates/home.html">HospitEase</a>
-  </div>
-  <!-- Copyright -->
-</footer>
-<!-- Footer -->
+
+    <footer class="text-center text-lg-start bg-body-tertiary text-muted color" style="   background: linear-gradient(90deg, hsla(24, 100%, 83%, 1) 0%, hsla(341, 91%, 68%, 1) 100%);" >
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          <!-- Left -->
+          <div class="me-5 d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
+          </div>
+          <!-- Left -->
+      
+          <!-- Right -->
+          <div>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-facebook-f" style="color: #921919;"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-twitter" style="color: #921919;"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-google" style="color: #921919;"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-instagram" style="color: #921919;"></i>
+            </a>
+            <!-- <a href="" class="me-4 text-reset">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-github"></i>
+            </a> -->
+          </div>
+          <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+      
+        <!-- Section: Links  -->
+        <section class="">
+          <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <!-- Content -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  <i class="fas fa-gem me-3"></i>HospitEase
+                </h6>
+                <p>
+                 Caring Made Easy
+                </p>
+              </div>
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  Facilities
+                </h6>
+                <p>
+                  <a href="/templates/vac.html" class="text-reset">Vaccines</a>
+                </p>
+                <p>
+                  <a href="/templates/sono.html" class="text-reset">Sonography</a>
+                </p>
+                <p>
+                  <a href="/templates/physio.html" class="text-reset">Physiotherapy</a>
+                </p>
+                <p>
+                  <a href="" class="text-reset">Cardiology</a>
+                </p>
+              </div>
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  Useful links
+                </h6>
+                <p>
+                  <a href="/templates/about.html" class="text-reset">About Us</a>
+                </p>
+                <p>
+                  <a href="/templates/Login.html" class="text-reset">Login</a>
+                </p>
+                <p>
+                  <a href="/templates/facility.html" class="text-reset">Feedback</a>
+                </p>
+                <p>
+                  <a href="/templates//help.html" class="text-reset">Help</a>
+                </p>
+              </div>
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                <p><i class="fas fa-home me-3"></i> Mumbai, 4000050 </p>
+                <p>
+                  <i class="fas fa-envelope me-3"></i>
+                  info@HospitEase.com
+                </p>
+                <p><i class="fas fa-phone me-3"></i> + 91 234 567 88</p>
+                <p><i class="fas fa-print me-3"></i> + 91 234 567 89</p>
+              </div>
+              <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+          </div>
+        </section>
+        <!-- Section: Links  -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2024 Copyright:
+          <a class="text-reset fw-bold" href="/templates/home.html">HospitEase</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
 </body>
-
 </html>
