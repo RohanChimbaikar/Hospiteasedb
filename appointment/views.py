@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from Hospitease import settings
 from .models import Appointment
 from django.shortcuts import HttpResponse
 from django.http import *
@@ -7,31 +9,51 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 
+
 @login_required
 def book_appointment(request):
     if request.method == 'POST':
         doctor_email = request.POST.get('doctor')
         doctor_user = User.objects.get(email=doctor_email)
         date = request.POST.get('date')
-        time = request.POST.get('selectedTime')
+        start_time = request.POST.get('start_time')  # Extract start time
+        end_time = request.POST.get('end_time')  # Extract end time
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
-        data = Appointment.objects.create(doctor=doctor_user, date=date, time=time, name=name, email=email, phone=phone, message=message)
+        
+        # Create the Appointment object with start and end times
+        data = Appointment.objects.create(
+            doctor=doctor_user,
+            date=date,
+            start_time=start_time,
+            end_time=end_time,
+            name=name,
+            email=email,
+            phone=phone,
+            message=message
+        )
         appointments = Appointment.objects.all()  # Query all appointments again after creating the new one
         time_slots = {
-        '09:00 AM': True,
-        '09:30 AM': False,
-        # Add more time slots as needed, with their disabled status
-    }
-
-        return render(request, 'appointment.html', {'appointment_details':True ,'time_slots':time_slots})
+            '09:00 AM': True,
+            '09:30 AM': False,
+            # Add more time slots as needed, with their disabled status
+        }
+        context = {}
+        if request.user.is_authenticated:
+            if hasattr(request.user, 'profile') and request.user.profile.avatar:
+                context['avatar_url'] = request.user.profile.avatar.url
+            else:
+                # Use the default avatar URL if the user doesn't have an avatar
+                context['avatar_url'] = settings.MEDIA_URL + 'profile_pictures/avatar.png'
+        
+        context.update({'appointment_details': True, 'time_slots': time_slots})
+        return render(request, 'home.html', context)
     
     else:
         return render(request, 'appointment.html')
-    
-    return render(request, 'appointment.html')
+
 
 
 

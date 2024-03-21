@@ -1,15 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/static/icon4.png" type="image/png">
+    <title>Document</title>
 
-    <title>Book Appointment</title>
-    <link rel="stylesheet" href="/static/appoint.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/home.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        h1 {
+            color: #13266C;
+        }
+        p {
+            color: #323743;
+        }
+        /* .highlight {
+            font-weight: bold;
+        } */
+        .mission {
+            /* background-color: #f2f2f2; */
+            padding: 20px;
+            border-radius: 15px;
+        }
+    
+        .show {
+            margin-left: 55px;
+        }
+        .move {
+            margin-left: 75%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .profile-menu {
+            display: flex;
+            align-items: center;
+        }
+    
+        .navbar-nav .nav-link {
+            font-weight: bolder;
+            font-size: 1.1rem;
+            color: #921919;
+            font-size: larger;
+        }
+        .nav-link {
+            color: #921919;
+            font-size: larger;
+        }
+        .container-fluid {
+            height: 82px;
+        }
+        /* Custom styles */
         .success-message {
             background-color: #d4edda;
             color: #155724;
@@ -18,134 +62,251 @@
             margin-bottom: 20px;
         }
         .selected {
-            background-color: #007bff;
+            background-color: #AB2848;
             color: #000000;
-            font-weight: 600;
-            border-color: #012f60;
+            border-color: #000000;
             border-width: 4px;
         }
+        .form-group {
+            margin-top: 10px;
+        }
+
+        .form-group button {
+            display: inline-block;
+            width: 20%;
+            margin: 0 1%;
+            margin-bottom: 5px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .form-group button:hover {
+            background-color: #9bcafb;
+        }
+
+        .form-group button[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Hide email help text by default */
+        #emailHelp {
+            display: none;
+        }
+        #btn:hover {
+            background-color: #AB2848; 
+        }
     </style>
+    <link rel="stylesheet" href="/static/appoint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
 </head>
 <body>
-    <header class="header">
-        <img id="logo" src="/static/Logo.png" alt="Logo">
-        <nav class="nav-items">
-            <a href="/templates/home.html">Home</a>
-            <a href="/templates/appointment.html">Book an appointment</a>
-            <a href="/templates/home.html">Logout</a>
-        </nav>
-    </header>
-    <div>
-        {% if appointment_details %}
-        <div class="success-message">
-            <h3>Appointment Booked Successfully</h3>
-        </div>
-    {% endif %}
-    </div>
-    <div class="container">
-        <h1>Book Appointment+</h1>
-        <form action="{% url 'bookappointment' %}" method="POST" id="appointmentForm" novalidate >
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="doctor">Doctor:</label>
-                <select id="doctor" name="doctor">
-                    <!-- <option value="Dr. Smith">Dr. Smith - Cardiology</option>
-                    <option value="Dr. Shan">Dr. Shan - Vaccines</option>
-                    <option value="Dr. Leo">Dr. Leo - X-Ray</option>
-                    <option value="Dr. Sweety">Dr. Sweety - Physiotherapist</option>
-                    <option value="Dr. Reign">Dr. Reign - Sonography</option>
-                    <option value="Dr. Abriel">Dr. Abriel - Pathologist</option>
-                    <option value="Dr. Jayden">Dr. Jayden - Gynaecology</option>
-                    <option value="Dr. Jaydenc">Dr. Jaydenc - CT Scan</option>
-                    <option value="Dr. Chris">Dr. Chris - Gastroentorology</option>
-                    <option value="Dr. Rachel">Dr. Rachel - Neurology</option>
-                    <option value="Dr. Riccha">Dr. Riccha - MRI</option>
-                    <option value="Dr. Shivangi">Dr. Shivangi - Emergency</option>
-                    <option value="Dr. Millie">Dr. Millie - Pediatrics</option>
-                    <option value="Dr. Nitesh">Dr. Nitesh - Dermatology</option>
-                    <option value="Dr. Fuzail">Dr. Fuzail - Speech Therapy</option> -->
-                    {% for user in doctor_users %}
-                    <option value="{{ user.username }}">{{ user.get_full_name }}</option>
-                    {% endfor %}
-                </select>        
-            </div>
-            
-            <div class="form-group">
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
-            </div>
-            <div class="form-group">
-                <label for="time">Available Time Slots:</label>
-                {% for time_slot in available_time_slots %}
-                {% if time_slot in accepted_time_slots %}
-                    <button type="button" data-time="{{ time_slot }}" disabled>{{ time_slot }}</button>
-                {% else %}
-                    <button type="button" data-time="{{ time_slot }}">{{ time_slot }}</button>
-                {% endif %}
-            {% endfor %}
-        
-                <label for="selectedTime">Selected Time:</label>
-                <input type="text" id="selectedTime" name="selectedTime" readonly>
-            </div>
-            <input type="submit" value="Book Appointment" name="submit" id="button">
-        </form>
-        
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script>
-        document.getElementById("date").addEventListener("change", function() {
-          const today = moment(); // Get today's date
-          const selectedDate = moment(this.value); // Convert selected date to moment object
-          if (selectedDate.isBefore(today)) {
-            this.value = ''; // Clear the input if date is in the past
-            alert("Please select a date in the future or today.");
-          }
-        });
-
-        const timeButtons = document.querySelectorAll('.time-slots button');
-        const selectedTimeInput = document.getElementById('selectedTime');
-
-        timeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove the 'selected' class from all buttons
-                timeButtons.forEach(btn => btn.classList.remove('selected'));
-                
-                // Add the 'selected' class to the clicked button
-                this.classList.add('selected');
-                
-                // Update the hidden input field with the selected time
-                const selectedTime = this.getAttribute('data-time');
-                selectedTimeInput.value = selectedTime;
-            });
-        });
-        document.getElementById("button").addEventListener("click", function(event) {
-    // Get the selected time
-    const selectedTimeInput = document.getElementById('selectedTime');
-    const selectedTime = selectedTimeInput.value;
-
-    // Convert the selected time to a valid format (HH:MM)
-    const formattedTime = moment(selectedTime, ['h:mm A']).format('HH:mm');
-
-    // Update the hidden input field with the formatted time
-    selectedTimeInput.value = formattedTime;
-});
-    </script>
     
+    <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/templates/home.html" style="font-weight: 700; margin-left: 32px;"><img src="/static/HospitEase_transparent.png" height="120px"> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto move">
+                    <li class="nav-item" >
+                        <a class="nav-link" href="/templates/home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/templates/facility.html">Facility</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/templates/about.html">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mr-0 mb-lg-0 profile-menu"> 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-pic mr-0">
+                                {% if request.user.profile.avatar %}
+                                    <img src="{{ avatar_url }}" alt="Profile Picture">
+                                {% else %}
+                                    <!-- Provide a default image or a placeholder if the user does not have an avatar -->
+                                    <img src="/media/profile_pictures/avatar.jpg" alt="Default Avatar">
+                                    {% endif %}
+                                    </div>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                    <!-- Conditionally render login/logout button -->
+                                    {% if user.is_authenticated %}
+                                    <!-- Display user's name or any other info -->
+                                    <a class="dropdown-item" href="/logout_usr"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                                    {% else %}
+                                    <a class="dropdown-item" href="/templates/Login_inst.html"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a>
+                                    {% endif %}
+                                    </li>
+                                    </ul>
+                                    </li>
+                                    </ul>
+                                    </div>
+                                    </div>
+                                    </nav>
+                                    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3"></div>
+                                    <div class="container2">
+                                    <h1>Book Appointment</h1>
+                                    <form action="{% url 'bookappointment' %}" method="POST" id="appointmentForm" >
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                    <label for="doctor">Doctor:</label>
+                                    <select id="doctor" name="doctor" required>
+                                    <option value="" disabled selected>Select a Doctor</option>
+                                    <!-- Options for doctors -->
+                                    {% for user in staff_users %}
+                                    <option value="{{ user.username }}">{{ user.get_full_name }} {% if user.departments.exists %}{% for department in user.departments.all %} ({{ department.name }}){% if not forloop.last %}, {% endif %}{% endfor %}{% else %} (No department){% endif %}</option>
+                                    {% endfor %}
+                                    </select>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" required value="{{ request.user.first_name }} {{ request.user.last_name }}">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" required value="{{ request.user.email }}">
+                                    <small id="emailHelp" class="form-text text-muted" style="display: none;">Please enter a valid email address.</small>
+                                    </div>
+                                    <!-- Other form fields -->
+                                    <div class="form-group">
+                                    <label for="phone">Phone:</label>
+                                    <input type="tel" id="phone" name="phone" value="{{ request.user.profile.phone_number }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="message">Message:</label>
+                                    <textarea id="message" name="message"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="date">Date:</label>
+                                    <input type="date" id="date" name="date" required>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="time_slots">Time Slots:</label>
+                                    <select id="time_slots" name="time_slots" required>
+                                    <!-- Options for time slots will be added dynamically using JavaScript -->
+                                    </select>
+                                    <input type="hidden" id="start_time" name="start_time">
+                                    <input type="hidden" id="end_time" name="end_time">
+                                    
+                                    <input type="submit" value="Book Appointment" name="submit" id="button">
+                                </form>
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+                            <script>
+                                document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+                                    const doctorSelect = document.getElementById("doctor");
+                                    const emailInput = document.getElementById("email");
+                                    const emailHelp = document.getElementById("emailHelp");
+                                    const dateInput = document.getElementById("date");
+                                    const timeSlotsDropdown = document.getElementById('time_slots');
+                            
+                                    if (doctorSelect.value === "") {
+                                        alert("Please select a doctor.");
+                                        event.preventDefault();
+                                        return;
+                                    }
+                            
+                                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                    if (!emailPattern.test(emailInput.value)) {
+                                        emailHelp.innerText = "Please enter a valid email address.";
+                                        emailHelp.style.display = "block";
+                                        emailInput.focus();
+                                        event.preventDefault();
+                                        return;
+                                    }
+                            
+                                    if (!dateInput.value) {
+                                        alert("Please select a date.");
+                                        event.preventDefault();
+                                        return;
+                                    }
+                            
+                                    if (!timeSlotsDropdown.value) {
+                                        alert("Please select a time slot.");
+                                        event.preventDefault();
+                                        return;
+                                    }
+                            
+                                    // Get the selected time range from the dropdown
+                                    const selectedTimeRange = timeSlotsDropdown.value;
+                            
+                                    // Split the time range into start and end times
+                                    const [startTimeStr, endTimeStr] = selectedTimeRange.split(' - ');
+                            
+                                    // Convert start and end times to HH:MM:ss format
+                                    const startTime = moment(startTimeStr, 'hh:mm A').format('HH:mm:ss');
+                                    const endTime = moment(endTimeStr, 'hh:mm A').format('HH:mm:ss');
+                            
+                                    // Populate the hidden fields for start_time and end_time
+                                    document.getElementById('start_time').value = startTime;
+                                    document.getElementById('end_time').value = endTime;
+                                });
+                            
+                                document.getElementById("date").addEventListener("change", function() {
+                                    const selectedDate = new Date(this.value);
+                                    const today = new Date();
+                            
+                                    if (selectedDate < today) {
+                                        alert("Please select a date in the future");
+                                        this.value = "";
+                                    }
+                                });
+                            
+                                document.getElementById('doctor').addEventListener('change', function() {
+                                    var selectedDoctor = this.value;
+                                    fetchTimeSlots(selectedDoctor);
+                                });
+                            
+                                function fetchTimeSlots(doctor) {
+                                    fetch(`/get_time_slots/?doctor=${doctor}`)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error('Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            var timeSlotDropdown = document.getElementById('time_slots');
+                                            timeSlotDropdown.innerHTML = '';
+                                            if (data.length === 0) {
+                                                // If no slots are available, display a message
+                                                var option = document.createElement('option');
+                                                option.text = 'No time slots available';
+                                                timeSlotDropdown.appendChild(option);
+                                            } else {
+                                                // If slots are available, populate the dropdown
+                                                data.forEach(slot => {
+                                                    var option = document.createElement('option');
+                                                    option.text = slot;
+                                                    option.value = slot;
+                                                    timeSlotDropdown.appendChild(option);
+                                                });
+                                            }
+                                        })
+                                        .catch(error => console.error('Error fetching time slots:', error));
+                                }
+                            </script>
+                            
+                            
+                            
+                            
+                            
+                            
+                        
 </body>
 </html>

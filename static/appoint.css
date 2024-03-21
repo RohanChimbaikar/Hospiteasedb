@@ -6,7 +6,7 @@ body {
 }
 
 
-.container {
+.container2{
     max-width: 500px;
     margin: 20px auto;
     padding: 20px;
@@ -46,7 +46,8 @@ select {
 #button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color:  #AB2848;
+    width: 100%;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -55,7 +56,7 @@ select {
 }
 
 #button:hover {
-    background-color: #0056b3;
+    background-color: #8D2500;
 }
 
 /* Resetting default margin and padding */
@@ -87,7 +88,7 @@ select {
   }
   
   /* Styling form */
-  .container {
+  .container2{
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
@@ -95,7 +96,7 @@ select {
     border-radius: 10px;
   }
   
-  .container h1 {
+  .container2 h1 {
     font-size: 32px;
     margin-bottom: 20px;
   }
@@ -163,8 +164,5 @@ select {
   }
   
   .time-slots button:hover {
-    background-color: #9bcafb;;
-  }
-  .selected {
-    background-color: #9bcafb; 
+    background-color: #AB2848;;
   }

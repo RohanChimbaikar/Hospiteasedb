@@ -1,0 +1,30 @@
+<!-- billing/templates/invoice_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Detail</title>
+    <!-- Add any CSS styles here -->
+</head>
+<body>
+    <h1>Invoice Detail</h1>
+    <table>
+        <tr>
+            <th>Patient</th>
+            <td>{{ invoice.patient }}</td>
+        </tr>
+        <tr>
+            <th>Date Created</th>
+            <td>{{ invoice.date_created }}</td>
+        </tr>
+        <tr>
+            <th>Total Amount</th>
+            <td>{{ invoice.total_amount }}</td>
+        </tr>
+        <!-- Add other invoice details here -->
+    </table>
+    <!-- Add any JavaScript scripts here -->
+</body>
+</html>

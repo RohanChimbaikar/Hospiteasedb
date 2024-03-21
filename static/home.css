@@ -275,3 +275,27 @@ body {
   border: 0.2px solid #8D2500;
 }
 
+
+.toast {
+  position: fixed;
+  top: 110px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  z-index: 10000; /* Ensure it's above other content */
+  background-color: #28a745;
+}
+.toast-header {
+  padding: 0.5rem;
+  background-color: #28a745 !important; /* Add !important to override Bootstrap styles */
+  color: #fff;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.toast-body {
+  padding: 0.5rem;
+  background-color: #f8f9fa; /* Change to your desired color */
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+.toast-close {
+  cursor: pointer;
+  padding: 0.5rem;
+}

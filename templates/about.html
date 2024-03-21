@@ -7,51 +7,41 @@
     <link rel="stylesheet" href="/static/about.css">
 </head>
 <body>
-<div class="about-section">
+<div class="about-section" style="background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%);  ">
     <h1>About Us Page</h1>
-    <p>A hospital which puts their patients first</p>
+    <p>Discover the Heartbeat of Our Hospital: Meet Our Caring and Skilled Staff, Committed to Your Health and Wellness.</p>
     <p>Located At - St Leo's road, Mumbai - 400030, Maharashtra, India .</p>
   </div>
   
-  <h2 style="text-align:center">Our Head Staff</h2>
   <div class="row">
+    {% for doctor in doctors %}
     <div class="column">
-      <div class="card">
-        <img src="/static/doc1.png" alt="Jane" style="width:100%">
-        <div class="container">
-          <h2>Jayden Dabhi</h2>
-          <p class="title">CEO & Director</p>
-          <p>"Aim for a better future."</p>
-          <p>Contact - jdabhi@hospitease.com</p>
+        <div class="card">
+          <img src="{{ doctor.profile.avatar.url }}" alt="{{ doctor.username }}" style="width:100%">
+            <div class="container">
+                <h2>{{ doctor.get_full_name }}</h2>
+                <p class="title">{{ doctor.profile.title }}</p>
+                <p>Contact - {{ doctor.email }}</p>
+                {% if doctor.department_headed %}
+                <p>Head of Department: {{ doctor.department_headed.name }}</p>
+                {% else %}
+                <p>Department: 
+                    {% for department in doctor.departments.all %}
+                        {{ department.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                {% if doctor.qualification %}
+                <p>Qualifications: {{ doctor.qualification.qualifications }}</p>
+                {% else %}
+                <p>No qualifications available.</p>
+                {% endif %}
+            </div>
         </div>
-      </div>
     </div>
-  
-    <div class="column">
-      <div class="card">
-        <img src="/static/doc2.png" alt="Jane" style="width:100%">
-        <div class="container">
-          <h2>Jayden Coutinho</h2>
-          <p class="title">Ass. Director</p>
-          <p>"Every life matters"</p>
-          <p>Contact - jaydencoutinho@hospitease.com</p>
-        </div>
-      </div>
-    </div>
-  
-    <div class="column">
-      <div class="card">
-        <img src="/static/doc7.png" alt="John" style="width:100%">
-        <div class="container">
-          <h2>Abriel Dsouza</h2>
-          <p class="title">Manager</p>
-          <p>"Live, Laugh, Love"</p>
-          <p>Contact - abrieldsouza@hospitease.com</p>
-          
-        </div>
-      </div>
-    </div>
-  </div>
+    {% endfor %}
+</div>
+
   
   <h2 style="text-align:center">Our Team Of Doctors</h2>
   <div class="row">

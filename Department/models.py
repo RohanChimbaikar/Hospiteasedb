@@ -10,7 +10,7 @@ class Department(models.Model):
     ('NEUROLOGY', 'Neurology'),
     ('ORTHOPEDICS', 'Orthopedics'),
     ('ONCOLOGY', 'Oncology'),
-    ('DERMATOLOGY', 'Dermatology'),
+    ('DERMATOLOGY', 'Dermatology'), 
     ('GASTROENTEROLOGY', 'Gastroenterology'),
     ('UROLOGY', 'Urology'),
     ('GYNECOLOGY', 'Gynecology'),  # Corrected to uppercase
@@ -38,3 +38,10 @@ class Department(models.Model):
 
     def __str__(self):
         return self.name
+
+class Qualification(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    qualifications = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} - {self.qualifications}"

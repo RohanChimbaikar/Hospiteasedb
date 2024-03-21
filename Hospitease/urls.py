@@ -28,7 +28,12 @@ from django.contrib.auth.views import LoginView
 from inventory.views import add_product, delete_product,edit_product,use_product
 from room_mgmt.views import occupy_room,unoccupy_room,release_room,book_room,room_list
 from register.views import register_usr,login_usr,logout_usr
+from billing.views import create_invoice,create_update_invoice,invoice_detail
+
 # from appointment.views import bkapt
+
+admin.site.site_header="HospitEase"
+admin.site.site_title="HospitEase Dashboard"
 
 urlpatterns = [
     # Home Page
@@ -64,6 +69,7 @@ urlpatterns = [
     path('templates/docdash.html',views.doc,name='doc'),
     path('send-acceptance-email/', send_acceptance_email, name='send_acceptance_email'),
     path('reject-appointment/', reject_email, name='reject_appointment'),
+    path('get_time_slots/', views.get_time_slots, name='get_time_slots'),
 
     
     path('book/<int:room_id>/', views.book_room, name='book_room'),
@@ -96,6 +102,13 @@ urlpatterns = [
     path('release/<int:room_id>/', views.release_room, name='release_room'),
     path('occupy/<int:room_id>/', views.occupy_room, name='occupy_room'),
     path('unoccupy/<int:room_id>/', views.unoccupy_room, name='unoccupy_room'),
+
+
+
+    #Billing
+    path('invoice/create/', create_update_invoice, name='create_invoice'),
+    path('invoice/update/<int:pk>/', create_update_invoice, name='update_invoice'),
+    path('invoice/<int:pk>/', invoice_detail, name='invoice_detail'),
 
 ]
 

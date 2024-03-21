@@ -838,10 +838,9 @@ p {
 																		<div class="col-sm-4 bg-c-lite-green user-profile">
 																			<div class="card-block text-center text-white">
 																				<div class="m-b-25" style="border: 2px solid black; border-radius: 50%; width: 150px; height: 150px; overflow: hidden;">
-																					<img src="{{ request.user.profile.avatar.url }}" alt="User-Profile-Image" style="width: 100%; height: 100%; object-fit: cover;">
-																				</div>
-																				
-																				
+																					<img src="{{ avatar_url }}" alt="User-Profile-Image" style="width: 100%; height: 100%; object-fit: cover;">
+																				</div>	
+													
 																				<h6 class="f-w-600">{{ request.user.get_full_name }}</h6>
 																				<p>Web Designer</p>
 																				<i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
@@ -924,6 +923,7 @@ p {
 			appointmentsTable.style.display = 'block';
 			inventoryTable.style.display = 'none';
 			roomsTable.style.display = 'none';
+			profiletable.style.display='none';
 		});
 	
 		inventoryLink.addEventListener('click', (event) => {
@@ -934,6 +934,7 @@ p {
 			appointmentsTable.style.display = 'none';
 			inventoryTable.style.display = 'block';
 			roomsTable.style.display = 'none'; 
+			profiletable.style.display='none';
 		});
 
 		roomsLink.addEventListener('click', (event) => { // Add this block
@@ -944,6 +945,7 @@ p {
     appointmentsTable.style.display = 'none';
     inventoryTable.style.display = 'none';
     roomsTable.style.display = 'block';
+	
 });
 
 	profile.addEventListener('click', (event) => {

@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .error-message {
+    color: red;
+}
+
+    </style>
 </head>
 <body>
     <header>
@@ -25,38 +31,38 @@
     <div class="container">
         <h2>Registration Form</h2>
         <div class="form">
-            <form id="registrationForm" action="{% url 'register_usr' %}" method="POST">
+            <form id="registrationForm" action="{% url 'register_usr' %}" method="POST" onsubmit="return validateForm()">
                 {% csrf_token %} 
                 <div class="input-name">
                     <i class="fa fa-user lock "></i>
-                    <input type="text" placeholder="First Name" class="name" name="fname">
+                    <input type="text" placeholder="First Name" class="name" name="fname" required>
                     <span>
                         <i class="fa fa-user lock"></i>
                     </span>
-                    <input type="text" placeholder="Last Name" class="name" name="lname">
+                    <input type="text" placeholder="Last Name" class="name" name="lname" required>
                 </div>
                 <div class="input-name">
                     <i class="fa fa-envelope email"></i>
-                    <input type="email" placeholder="Email" class="text-name" name="un" id="email">
+                    <input type="email" placeholder="Email" class="text-name" name="un" id="email" required>
                     <span id="emailError" class="error-message"></span>
                 </div>
                 <div class="input-name">
                     <i class="fa fa-lock email"></i>
-                    <input type="password" placeholder="Password" class="text-name" name="pw" id="password">
+                    <input type="password" placeholder="Password" class="text-name" name="pw" id="password" >
                     <span id="passwordError" class="error-message"></span>
                 </div>
                 <div class="input-name">
                     <i class="fa fa-lock"></i>
-                    <input type="password" placeholder="Re-Enter Password" class="text-name" id="rePassword">
+                    <input type="password" placeholder="Re-Enter Password" class="text-name" id="rePassword" >
                     <span id="rePasswordError" class="error-message"></span>
                 </div>
                 <div class="input-name">
                     <i class="fa fa-phone"></i>
-                    <input type="tel" placeholder="Phone Number" class="name" name="pn">
+                    <input type="tel" placeholder="Phone Number" class="name" name="pn" required>
                 </div>
                 <div class="input-name">
                     <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob">
+                    <input type="date" id="dob" name="dob" required>
                 </div>
                 <div class="input-name">
                     <label>Gender:</label>
@@ -69,6 +75,7 @@
                 </div>
                 <div class="input-name">
                     <input type="checkbox" class="checkbutton" id="termsCheckbox"> <label class="check">I accept the terms of service and privacy policy</label>
+                    <span id="termsCheckboxError" class="error-message"></span>
                 </div>
                 <div class="input-name">
                     <input type="submit" class="Submit-button" value="Register">
@@ -84,43 +91,51 @@
             var password = document.getElementById("password").value;
             var rePassword = document.getElementById("rePassword").value;
             var termsCheckbox = document.getElementById("termsCheckbox").checked;
+            var errors = [];
 
             if (!validateEmail(email)) {
                 document.getElementById("emailError").innerHTML = "Please enter a valid email address.";
-                return false;
+                errors.push("email");
             } else {
                 document.getElementById("emailError").innerHTML = "";
             }
 
             if (password.trim() === "") {
-                document.getElementById("passwordError").innerHTML = "Kindly enter password.";
-                return false;
+                document.getElementById("passwordError").innerHTML = "Kindly enter a password.";
+                errors.push("password");
             } else {
                 document.getElementById("passwordError").innerHTML = "";
             }
 
             if (rePassword.trim() === "") {
-                document.getElementById("rePasswordError").innerHTML = "Kindly re-enter password.";
-                return false;
+                document.getElementById("rePasswordError").innerHTML = "Kindly re-enter the password.";
+                errors.push("rePassword");
             } else {
                 document.getElementById("rePasswordError").innerHTML = "";
             }
 
             if (password !== rePassword) {
                 document.getElementById("rePasswordError").innerHTML = "Passwords do not match.";
-                return false;
+                errors.push("rePassword");
             } else {
                 document.getElementById("rePasswordError").innerHTML = "";
             }
 
             if (!termsCheckbox) {
-                document.getElementById("errorMessage").innerHTML = "Kindly select all checkboxes.";
+                document.getElementById("termsCheckboxError").innerHTML = "Please accept the terms of service and privacy policy.";
+                errors.push("termsCheckbox");
+            } else {
+                document.getElementById("termsCheckboxError").innerHTML = "";
+            }
+
+            if (errors.length > 0) {
+                var errorFields = errors.join(", ");
+                document.getElementById("errorMessage").innerHTML = "Please fill in the required fields: " + errorFields + ".";
                 return false;
             } else {
                 document.getElementById("errorMessage").innerHTML = "";
+                return true;
             }
-
-            return true;
         }
 
         function validateEmail(email) {

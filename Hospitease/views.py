@@ -1,19 +1,28 @@
-from django.http import HttpResponse
-from django.shortcuts import render 
-from appointment.models import Appointment
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.urls import reverse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.exceptions import ObjectDoesNotExist
+
+from appointment.models import Appointment, Doctor
 from inventory.models import Product
 from room_mgmt.models import Room
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User
-from django.conf import settings
-
+from Department.models import Department
 
 
 
 def about(request):
-    return render(request,"about.html")
+    # Retrieve the head of departments
+    head_of_departments = User.objects.filter(departments__head_of_department__isnull=False)
+    
+    # Retrieve all doctors
+    doctors = User.objects.filter(groups__name='Doctors')
+    
+    return render(request, "about.html", {'head_of_departments': head_of_departments, 'doctors': doctors})
+
 
 def home(request):
     context = {}
@@ -65,13 +74,73 @@ def log(request):
 def logg(request):
     return render(request,"templates/Login_inst.html")
 
+
+def get_time_slots(request):
+    if request.method == 'GET':
+        doctor_username = request.GET.get('doctor')
+        if doctor_username:
+            try:
+                doctor = Doctor.objects.get(user__username=doctor_username)
+                time_slots = [str(slot) for slot in doctor.time_slots.all()]
+                if not time_slots:
+                    return JsonResponse({'message': 'No time slots available for this doctor'}, status=200)
+                else:
+                    return JsonResponse(time_slots, safe=False)
+            except Doctor.DoesNotExist:
+                return JsonResponse({'error': 'Doctor not found'}, status=404)
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def custom_login_required(login_url=None):
+    def decorator(view_func):
+        actual_decorator = user_passes_test(
+            lambda u: u.is_authenticated,
+            login_url=login_url,
+        )
+        return actual_decorator(view_func)
+    return decorator
+
+
+
+@custom_login_required(login_url='/templates/Login.html')
 def appoint(request):
-    staff_users = User.objects.filter(is_staff=True)
-    accepted_appointments = Appointment.objects.filter(accepted=True).values('time')
-    accepted_time_slots = [appointment['time'].strftime('%I:%M %p') for appointment in accepted_appointments]
-    available_time_slots = ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM", "03:00 PM"]
-    print(available_time_slots)
-    return render(request,"appointment.html",{'staff_users': staff_users,'accepted_time_slots': accepted_time_slots,'available_time_slots':available_time_slots})
+    context = {}
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'profile') and request.user.profile.avatar:
+            context['avatar_url'] = request.user.profile.avatar.url
+        else:
+            # Use the default avatar URL if the user doesn't have an avatar
+            context['avatar_url'] = settings.MEDIA_URL + 'profile_pictures/avatar.png'
+    
+    # Retrieve staff users and accepted appointments
+    staff_users = User.objects.filter(is_staff=True).exclude(username='admin').prefetch_related('departments').all()
+  
+    
+    # Retrieve doctors from the "Doctors" group
+    doctor_group = Group.objects.get(name='Doctors')
+    doctors = doctor_group.user_set.all()
+    
+    # Initialize a list to store available time slots
+    available_time_slots = []
+    accepted_time_slots = []
+    
+    # Loop through each doctor and retrieve their time slots
+    for doctor in doctors:
+        try:
+            # Retrieve the associated Doctor object for the user
+            doctor_profile = doctor.doctor_profile  # Assuming a OneToOneField to Doctor model
+            
+            # Access the time slots associated with the doctor profile
+            time_slots = doctor_profile.time_slots.all()
+            
+            # Append the time slots to the list
+            available_time_slots.extend(time_slots)
+        except ObjectDoesNotExist:
+            # Handle the case where the doctor profile does not exist for the user
+            pass
+    
+    return render(request, "appointment.html", {'staff_users': staff_users, 'accepted_time_slots': accepted_time_slots, 'available_time_slots': available_time_slots, 'avatar_url': context.get('avatar_url', None)})
+
 
 def dash(request):
     return render(request,"templates/admindash.html")
@@ -85,26 +154,40 @@ def invent(request):
 @login_required
 @staff_member_required(login_url='/stafflog/')
 def doc(request):
+    context = {}
     if request.user.is_authenticated:
+        # Check if the user has a profile picture
+        if hasattr(request.user, 'profile') and request.user.profile.avatar:
+            context['avatar_url'] = request.user.profile.avatar.url
+        else:
+            # Use the default avatar URL if the user doesn't have an avatar
+            context['avatar_url'] = settings.MEDIA_URL + 'profile_pictures/avatar.png'
+        
+        # Fetch other data if user is authenticated
         appointments = Appointment.objects.filter(doctor=request.user)
         user_full_name = request.user.get_full_name()
         products = Product.objects.all()
         available_rooms = Room.objects.filter(available=True)
         unavailable_rooms = Room.objects.filter(available=False)
-        # email_sent = request.session.get('email_sent', False)
         email_sent = request.session.pop('email_sent', False)
         reject_sent = request.session.pop('reject_sent', False)
-        return render(request, 'docdash.html', {
+        
+        # Add fetched data to the context
+        context.update({
             "data": appointments,
             'products': products,
             'available_rooms': available_rooms,
             'unavailable_rooms': unavailable_rooms,
             'user_full_name': user_full_name,
-            'email_sent':email_sent,
-            'reject_sent':reject_sent,
+            'email_sent': email_sent,
+            'reject_sent': reject_sent,
         })
+        
+        # Render the template with the combined context
+        return render(request, 'docdash.html', context)
     else:
         return redirect("login")  # Redirect to the login page if the user is not authenticated
+  # Redirect to the login page if the user is not authenticated
 
 
 def book_room(request, room_id):
