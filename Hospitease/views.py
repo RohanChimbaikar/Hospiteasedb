@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
 from appointment.models import Appointment, Doctor
 from inventory.models import Product
@@ -23,6 +24,8 @@ def about(request):
     
     return render(request, "about.html", {'head_of_departments': head_of_departments, 'doctors': doctors})
 
+def profile(request):
+    return render(request,'templates/profile.html')
 
 def home(request):
     context = {}
@@ -32,10 +35,27 @@ def home(request):
         else:
             # Use the default avatar URL if the user doesn't have an avatar
             context['avatar_url'] = settings.MEDIA_URL + 'profile_pictures/avatar.png'
+        
+        # Check if the user belongs to the 'Doctors' group
+        is_doctor = request.user.groups.filter(name='Doctors').exists()
+        context['is_doctor'] = is_doctor
+
     return render(request, 'home.html', context)
 
 def facility(request):
-    return render(request,"facility.html")
+    context = {}
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'profile') and request.user.profile.avatar:
+            context['avatar_url'] = request.user.profile.avatar.url
+        else:
+            # Use the default avatar URL if the user doesn't have an avatar
+            context['avatar_url'] = settings.MEDIA_URL + 'profile_pictures/avatar.png'
+        
+        # Check if the user belongs to the 'Doctors' group
+        is_doctor = request.user.groups.filter(name='Doctors').exists()
+        context['is_doctor'] = is_doctor
+
+    return render(request,"facility.html",context)
 
 def login(request):
     return render(request,"templates/Login.html")
@@ -150,11 +170,26 @@ def invent(request):
     products = Product.objects.all()
     return render(request,"templates/docdash.html",{'products': products})
 
+from django.shortcuts import render, redirect
+from django.conf import settings
+
+from django.contrib.auth.models import User, Group
 
 @login_required
 @staff_member_required(login_url='/stafflog/')
 def doc(request):
-    context = {}
+    # Retrieve head of departments
+    head_of_departments = User.objects.filter(departments__head_of_department__isnull=False)
+    
+    # Retrieve all doctors along with their departments
+    doctors = User.objects.filter(groups__name='Doctors')
+    
+    # Add fetched data to the context
+    context = {
+        'head_of_departments': head_of_departments, 
+        'doctors': doctors
+    }
+
     if request.user.is_authenticated:
         # Check if the user has a profile picture
         if hasattr(request.user, 'profile') and request.user.profile.avatar:
@@ -171,7 +206,10 @@ def doc(request):
         unavailable_rooms = Room.objects.filter(available=False)
         email_sent = request.session.pop('email_sent', False)
         reject_sent = request.session.pop('reject_sent', False)
-        
+        department_info = Department.objects.filter(doctors=request.user).first()
+        dob=request.user.profile.date_of_birth
+        print(dob)
+        print(department_info)
         # Add fetched data to the context
         context.update({
             "data": appointments,
@@ -181,12 +219,14 @@ def doc(request):
             'user_full_name': user_full_name,
             'email_sent': email_sent,
             'reject_sent': reject_sent,
+            'department':department_info,
         })
         
         # Render the template with the combined context
         return render(request, 'docdash.html', context)
     else:
-        return redirect("login")  # Redirect to the login page if the user is not authenticated
+        return redirect("login")
+  # Redirect to the login page if the user is not authenticated
   # Redirect to the login page if the user is not authenticated
 
 
@@ -230,3 +270,30 @@ def unoccupy_room(request, room_id):
 def staffreg(request):
     return render(request,'templates/staffreg.html')
 
+def edit_profile(request):
+    if request.method == 'POST':
+        email=request.POST.get('email')
+        phone=request.POST.get('phoneNumber')
+        gender=request.POST.get('gender')
+        address = request.POST.get('address')
+        medical_school = request.POST.get('medicalSchool')
+        date_of_birth = request.POST.get('dateOfBirth')
+        license_number = request.POST.get('licenseNumber')
+        
+        # Update the profile data
+        profile = request.user.profile
+        profile.gender = gender
+        profile.email=email
+        profile.phone_number=phone
+        profile.address = address
+        profile.medical_school = medical_school
+        profile.date_of_birth = date_of_birth
+        profile.license_number = license_number
+        profile.save()
+                
+        # Redirect to some page after saving changes
+        return redirect('doc')  # Redirect to profile page or any other page
+    else:
+        # Handle GET request, if needed
+        
+        return render(request, 'docdash.html', {'success_message': messages.get_messages(request)})

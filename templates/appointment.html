@@ -100,6 +100,73 @@
         #btn:hover {
             background-color: #AB2848; 
         }
+        .show{
+      margin-left: 55px;
+    }
+    .move{
+      margin-left: 75%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .profile-menu {
+        display: flex;
+        align-items: center;
+    }
+    
+    .navbar-nav .nav-link {
+        font-weight: bolder;
+        font-size: 1.1rem;
+        color: #921919;
+      font-size:larger;
+        
+    }
+    .nav-link{
+      color: #921919;
+      font-size:larger;
+    
+    }
+    .container-fluid{
+      height: 82px;
+      
+    }
+    .profile-pic{
+   display: inline-block;
+   vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+   border-radius: 50%;
+   margin-left: 10px;
+}
+
+.profile-pic img{
+   width: 100%;
+   height: auto;
+   object-fit: cover;
+}
+.profile-menu .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+.profile-menu .fa-fw {
+  margin-right: 10px;
+}
+
+.toggle-change::after {
+  border-top: 0;
+  border-bottom: 0.3em solid;
+}
+
+.dropdown-toggle{
+  margin-right: 10px; 
+}
+
+.profile-pic{
+  border-radius: 50%;
+  border: 0.2px solid #8D2500;
+}
+/* } background: linear-gradient(90deg, hsla(30, 83%, 91%, 1) 0%, hsla(298, 69%, 90%, 1) 100%); */
+
     </style>
     <link rel="stylesheet" href="/static/appoint.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -107,16 +174,18 @@
     
 </head>
 <body>
-    
-    <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%);">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%); padding: 0.5rem 1rem;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/templates/home.html" style="font-weight: 700; margin-left: 32px;"><img src="/static/HospitEase_transparent.png" height="120px"> </a>
+            <a class="navbar-brand" href="/templates/home.html" style="font-weight: 700; margin-left: 16px; font-size: 1.25rem;">
+                <img src="/static/HospitEase_transparent.png" height="80px">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto move">
-                    <li class="nav-item" >
+                <ul class="navbar-nav mr-auto move" style="font-size: 0.9rem;">
+                    <li class="nav-item">
                         <a class="nav-link" href="/templates/home.html">Home</a>
                     </li>
                     <li class="nav-item">
@@ -126,37 +195,37 @@
                         <a class="nav-link" href="/templates/about.html">About</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto mb-2 mr-0 mb-lg-0 profile-menu"> 
+                <ul class="navbar-nav ms-auto mb-2 mr-0 mb-lg-0 profile-menu">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="profile-pic mr-0">
+                            <div class="profile-pic mr-0" style="width: 36px; height: 36px;">
                                 {% if request.user.profile.avatar %}
-                                    <img src="{{ avatar_url }}" alt="Profile Picture">
+                                    <img src="{{ avatar_url }}" alt="Profile Picture" style="width: 100%; height: 100%; border-radius: 50%;">
                                 {% else %}
-                                    <!-- Provide a default image or a placeholder if the user does not have an avatar -->
-                                    <img src="/media/profile_pictures/avatar.jpg" alt="Default Avatar">
-                                    {% endif %}
-                                    </div>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                    <!-- Conditionally render login/logout button -->
-                                    {% if user.is_authenticated %}
-                                    <!-- Display user's name or any other info -->
-                                    <a class="dropdown-item" href="/logout_usr"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
-                                    {% else %}
-                                    <a class="dropdown-item" href="/templates/Login_inst.html"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a>
-                                    {% endif %}
-                                    </li>
-                                    </ul>
-                                    </li>
-                                    </ul>
-                                    </div>
-                                    </div>
-                                    </nav>
+                                    <img src="/media/profile_pictures/avatar.jpg" alt="Default Avatar" style="width: 100%; height: 100%; border-radius: 50%;">
+                                {% endif %}
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#" style="font-size: 0.9rem;"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                            <li><a class="dropdown-item" href="#" style="font-size: 0.9rem;"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                {% if user.is_authenticated %}
+                                    <a class="dropdown-item" href="/logout_usr" style="font-size: 0.9rem;"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
+                                {% else %}
+                                    <a class="dropdown-item" href="/templates/Login_inst.html" style="font-size: 0.9rem;"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+
                                     <div id="toast-container" class="position-fixed bottom-0 end-0 p-3"></div>
                                     <div class="container2">
                                     <h1>Book Appointment</h1>
@@ -202,7 +271,7 @@
                                     <input type="hidden" id="start_time" name="start_time">
                                     <input type="hidden" id="end_time" name="end_time">
                                     
-                                    <input type="submit" value="Book Appointment" name="submit" id="button">
+                                    <input type="submit" value="Book Appointment" name="submit" id="button" style="margin-top: 30px;">
                                 </form>
                             </div>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -303,6 +372,8 @@
                             </script>
                             
                             
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
                             
                             
                             

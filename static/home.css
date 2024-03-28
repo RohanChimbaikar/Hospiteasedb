@@ -228,13 +228,13 @@ body {
   /* The typing effect */
   @keyframes typing {
     from { width: 0 }
-    to { width: 25% }
+    to { width: 20% }
   }
   
   /* The typewriter cursor effect */
   @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: orange; }
+    30% { border-color: orange; }
   }
 
   /* Profile Picture */

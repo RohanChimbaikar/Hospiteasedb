@@ -66,20 +66,34 @@ def send_acceptance_email(request):
         appointment = Appointment.objects.get(id=appointment_id)
         
         # Send acceptance email
+        subject = 'Appointment Accepted'
+        message = (
+        'Dear {},\n\n'
+        'We are pleased to inform you that your appointment has been accepted.\n\n'
+        'Appointment Details:\n'
+        '- Date: {}\n'
+        '- Start Time: {}\n'
+        '- End Time: {}\n'
+        '- Doctor: {}\n\n'
+        'We look forward to seeing you.\n\n'
+        'Best regards,\n'
+        'HospitEase Team'.format(
+            appointment.name, 
+            appointment.date, 
+            appointment.start_time.strftime('%I:%M %p'), 
+            appointment.end_time.strftime('%I:%M %p'), 
+            appointment.doctor
+        )
+    )
+        sender_email = 'team@hospitease.com'
+        recipient_email = [appointment.email]
+
         send_mail(
-            'Appointment Accepted',
-            'Dear {},\n\n' \
-                      'We are pleased to inform you that your appointment has been accepted.\n\n' \
-                      'Appointment Details:\n' \
-                      '- Date: {}\n' \
-                      '- Time: {}\n' \
-                      '- Doctor: {}\n\n' \
-                      'We look forward to seeing you.\n\n' \
-                      'Best regards,\n' \
-                      'HospitEase Team'.format(appointment.name, appointment.date, appointment.time, appointment.doctor),
-            'team@hospitease.com',
-            [appointment.email],
-            fail_silently=False,
+        subject,
+        message,
+        sender_email,
+        recipient_email,
+        fail_silently=False,
         )
         request.session['email_sent'] = True
         appointment.accepted = True
@@ -105,22 +119,30 @@ def reject_email(request):
         appointment = Appointment.objects.get(id=appointment_id)
         
         # Send acceptance email
-        send_mail(
-            'Appointment Rejection Notification',
-            'Dear {},\n\n' \
-            'We regret to inform you that your appointment scheduled for {} at {} with {} has been rejected.\n\n' \
-            'Unfortunately, due to unforeseen circumstances, we are unable to accommodate your appointment request at this time. We apologize for any inconvenience this may cause.\n\n' \
-            'Please feel free to reschedule your appointment at your earliest convenience by contacting our receptionist at:\n\n' \
-            'Receptionist\'s Name: Emily Johnson\n' \
-            'Receptionist\'s Email: emily.johnson@hospitease.com\n' \
-            'Receptionist\'s Phone: +91 9372172051 \n\n' \
-            'Thank you for your understanding.\n\n' \
-            'Best regards,\n' \
-            'HospitEase Team'.format(appointment.name, appointment.date, appointment.time, appointment.doctor),
-            'team@hospitease.com',
-            [appointment.email],
-            fail_silently=False,
+        subject = 'Appointment Rejection Notification'
+        message = (
+            'Dear {},\n\n'
+            'We regret to inform you that your appointment scheduled for {} at {} to {} with {} has been rejected.\n\n'
+            'Unfortunately, due to unforeseen circumstances, we are unable to accommodate your appointment request at this time. We apologize for any inconvenience this may cause.\n\n'
+            'Please feel free to reschedule your appointment at your earliest convenience by contacting our receptionist at:\n\n'
+            'Receptionist\'s Name: Emily Johnson\n'
+            'Receptionist\'s Email: emily.johnson@hospitease.com\n'
+            'Receptionist\'s Phone: +91 9372172051 \n\n'
+            'Thank you for your understanding.\n\n'
+            'Best regards,\n'
+            'HospitEase Team'.format(appointment.name, appointment.date, appointment.start_time.strftime('%I:%M %p'), appointment.end_time.strftime('%I:%M %p'), appointment.doctor)
         )
+
+        sender_email = 'team@hospitease.com'
+        recipient_email = [appointment.email]
+
+        send_mail(
+        subject,
+        message,
+        sender_email,
+        recipient_email,
+        fail_silently=False,
+    )
         request.session['reject_sent'] = True
         
         # Redirect to the URL of the other view

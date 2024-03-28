@@ -118,7 +118,15 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#" style="font-size: 0.9rem;"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                      {% if user.is_authenticated %}
+                      <li><a class="dropdown-item" href="#" style="font-size: 0.9rem;"></i>Welcome {{ request.user.first_name }}
+                      </a></li>
+                      {% endif %}
+                      <li><a class="dropdown-item" href="{% url 'pfpage' %}" style="font-size: 0.9rem;"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                      {% if is_doctor %}
+                      <li><a class="dropdown-item" href="{% url 'doc' %}" style="font-size: 0.9rem;"><i class="fa-solid fa-chart-line"></i>
+                          Dashboard</a>
+                           </a></li> {% endif %}
                         <li><a class="dropdown-item" href="#" style="font-size: 0.9rem;"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
@@ -128,6 +136,7 @@
                                 <a class="dropdown-item" href="/templates/Login_inst.html" style="font-size: 0.9rem;"><i class="fas fa-sign-in-alt fa-fw"></i> Log In</a>
                             {% endif %}
                         </li>
+                       
                     </ul>
                 </li>
             </ul>
@@ -179,7 +188,7 @@
   </div>
         <!-- <img src="../static/white.jpeg.jpg" > -->
     </div>
-    <iframe style="border-radius:30px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1137.1317312390179!2d72.82958419683968!3d19.056881558537558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c93fee567a43%3A0x239fd172208c865!2sSt.%20Andrew&#39;s%20College%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra%20400050!5e0!3m2!1sen!2sin!4v1710947467214!5m2!1sen!2sin" width="2000" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe style="border-radius:30px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1137.1317312390179!2d72.82958419683968!3d19.056881558537558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c93fee567a43%3A0x239fd172208c865!2sSt.%20Andrew&#39;s%20College%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra%20400050!5e0!3m2!1sen!2sin!4v1710947467214!5m2!1sen!2sin" width="2000" height="280" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </main>
   <!-- <footer class="footer">

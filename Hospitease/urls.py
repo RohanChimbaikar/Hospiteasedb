@@ -37,6 +37,7 @@ admin.site.site_title="HospitEase Dashboard"
 
 urlpatterns = [
     # Home Page
+    path('profile.html',views.profile,name='pfpage'),
     path('admin/', admin.site.urls),
     path('', views.home),
     path('templates/home.html', views.home,name='home'),
@@ -109,6 +110,7 @@ urlpatterns = [
     path('invoice/create/', create_update_invoice, name='create_invoice'),
     path('invoice/update/<int:pk>/', create_update_invoice, name='update_invoice'),
     path('invoice/<int:pk>/', invoice_detail, name='invoice_detail'),
+    path('edit_profile',views.edit_profile,name='edit_profile'),
 
 ]
 

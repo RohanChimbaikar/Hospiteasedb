@@ -90,6 +90,13 @@ body {
 	display: flex;
 	justify-content: center;
 }
+
+#sidebar .brand .ax {
+	min-width: 60px;
+	display: flex;
+	justify-content: center;
+}
+
 #sidebar .side-menu {
 	width: 100%;
 	margin-top: 48px;
@@ -153,6 +160,11 @@ body {
 	color: var(--blue);
 }
 #sidebar .side-menu li a .bx {
+	min-width: calc(60px  - ((4px + 6px) * 2));
+	display: flex;
+	justify-content: center;
+}
+#sidebar .side-menu li a .ax {
 	min-width: calc(60px  - ((4px + 6px) * 2));
 	display: flex;
 	justify-content: center;
@@ -624,3 +636,7 @@ body {
 	width: 80%;
 }
 
+
+#description{
+	width: 100px;
+}

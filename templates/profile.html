@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    /* Add your custom styles here */
+    .profile-card {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .edit-icon {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">User Profile</h1>
+    <div class="card profile-card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Profile Details</h5>
+        <!-- Display user details in textboxes using template tags -->
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="firstName" name="firstName" value="{{ user.first_name }}" readonly>
+              <div class="input-group-append">
+                <span class="input-group-text edit-icon" data-target="#editFirstNameModal"><i class="fas fa-edit"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="lastName" name="lastName" value="{{ user.last_name }}" readonly>
+              <div class="input-group-append">
+                <span class="input-group-text edit-icon" data-target="#editLastNameModal"><i class="fas fa-edit"></i></span>
+              </div>
+            </div>
+          </div>
+          <!-- Add similar fields for other profile details -->
+          <button type="button" class="btn btn-primary" id="editButton">Edit Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit First Name Modal -->
+  <div class="modal fade" id="editFirstNameModal" tabindex="-1" role="dialog" aria-labelledby="editFirstNameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editFirstNameModalLabel">Edit First Name</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Form to edit first name -->
+          <div class="form-group">
+            <label for="editFirstName">New First Name</label>
+            <input type="text" class="form-control" id="editFirstName" name="editFirstName" value="{{ user.first_name }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveFirstNameButton">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Last Name Modal -->
+  <div class="modal fade" id="editLastNameModal" tabindex="-1" role="dialog" aria-labelledby="editLastNameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editLastNameModalLabel">Edit Last Name</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Form to edit last name -->
+          <div class="form-group">
+            <label for="editLastName">New Last Name</label>
+            <input type="text" class="form-control" id="editLastName" name="editLastName" value="{{ user.last_name }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveLastNameButton">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // Add your custom JavaScript here
+    $(document).ready(function() {
+      // Show edit profile modal when edit icon is clicked
+      $(".edit-icon").click(function() {
+        var targetModal = $(this).data("target");
+        $(targetModal).modal("show");
+      });
+
+      // Save changes for first name
+      $("#saveFirstNameButton").click(function() {
+        // Perform AJAX request to save changes for first name
+        // Example: $.post("/api/user/profile/editFirstName", $("#editFirstNameForm").serialize(), function(data) { /* Handle response */ });
+        // Close modal
+        $("#editFirstNameModal").modal("hide");
+      });
+
+      // Save changes for last name
+      $("#saveLastNameButton").click(function() {
+        // Perform AJAX request to save changes for last name
+        // Example: $.post("/api/user/profile/editLastName", $("#editLastNameForm").serialize(), function(data) { /* Handle response */ });
+        // Close modal
+        $("#editLastNameModal").modal("hide");
+      });
+
+      // Add similar functions for other profile details
+    });
+  </script>
+</body>
+</html>
