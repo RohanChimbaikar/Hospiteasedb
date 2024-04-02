@@ -19,7 +19,7 @@ li {
 	--lato: 'Lato', sans-serif;
 
 	--light: #F9F9F9;
-	--blue: #3C91E6;
+	--blue: #ab2848;
 	--light-blue: #CFE8FF;
 	--grey: #eee;
 	--dark-grey: #AAAAAA;
@@ -76,7 +76,7 @@ body {
 	height: 56px;
 	display: flex;
 	align-items: center;
-	color: var(--blue);
+	color:#ab2848;
 	position: sticky;
 	top: 0;
 	left: 0;
@@ -147,7 +147,7 @@ body {
 	overflow-x: hidden;
 }
 #sidebar .side-menu.top li.active a {
-	color: var(--blue);
+	color: #ab2848;
 }
 #sidebar.hide .side-menu li a {
 	width: calc(48px - (4px * 2));
@@ -157,7 +157,7 @@ body {
 	color: var(--red);
 }
 #sidebar .side-menu.top li a:hover {
-	color: var(--blue);
+	color: #ab2848;
 }
 #sidebar .side-menu li a .bx {
 	min-width: calc(60px  - ((4px + 6px) * 2));
@@ -226,7 +226,7 @@ body {
 	transition: .3s ease;
 }
 #content nav .nav-link:hover {
-	color: var(--blue);
+	color: #ab2848;
 }
 #content nav form {
 	max-width: 400px;
@@ -255,7 +255,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: var(--blue);
+	background: #ab2848;
 	color: var(--light);
 	font-size: 18px;
 	border: none;
@@ -640,3 +640,563 @@ body {
 #description{
 	width: 100px;
 }
+
+/* Custom styles for the close button */
+.closex {
+    color: #000; /* Change the color of the close button */
+    background-color: transparent; /* Make the background transparent */
+    border: none; /* Remove border */
+    font-size: 1.5rem; /* Adjust font size */
+    position: absolute; /* Position the button */
+    top: 10px; /* Adjust top position */
+    right: 10px; /* Adjust right position */
+    opacity: 0.5; /* Set initial opacity */
+    transition: opacity 0.3s ease; /* Add transition effect */
+}
+
+/* Hover effect */
+.closex:hover {
+    opacity: 1; /* Change opacity on hover */
+}
+
+/* Focus effect */
+.closex:focus {
+    outline: none; /* Remove outline */
+    opacity: 1; /* Change opacity on focus */
+}
+
+
+
+		/* General table styling */
+		#appointments-table table {
+			width: 100%;
+			border-collapse: collapse;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		#appointments-table th,
+		#appointments-table td {
+			padding: 10px;
+			text-align: center;
+		}
+
+		/* Header styling */
+		#appointments-table th {
+			background-color: #c32d52;
+			color: white;
+		}
+
+		/* Alternating row colors */
+		/* #appointments-table tbody tr:nth-child(even) {
+			background-color: rgba(255, 255, 255, 0.8);
+		} */
+		#appointments-table tbody tr:nth-child(even) {
+    		background-color: rgba(255, 255, 255, 0.8);
+		}
+		/* Hover effect */
+		#appointments-table tbody tr:hover {
+			background-color: #f7d4dc;
+		}
+
+		/* Button styling */
+		#appointments-table .optionss form {
+			display: inline-block;
+			margin-right: 5px;
+		}
+
+		#appointments-table .accept,
+		#appointments-table .reject {
+			padding: 8px 16px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		/* Accept button */
+		#appointments-table .accept {
+			background-color: #4caf50;
+			color: white;
+		}
+
+		#appointments-table .accept:hover {
+			background-color: #45a049;
+		}
+
+		/* Reject button */
+		#appointments-table .reject {
+			background-color: #ff5252;
+			color: white;
+		}
+		#appointments-table tbody tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+
+		#appointments-table .reject:hover {
+			background-color: #e04848;
+		}
+
+		/* Responsive column widths */
+		#appointments-table th:nth-child(1),
+		#appointments-table td:nth-child(1) {
+			width: 12%;
+			/* Adjust the width as needed */
+		}
+
+		#appointments-table th:nth-child(4),
+		#appointments-table td:nth-child(4) {
+			width: 15%;
+			/* Adjust the width as needed */
+		}
+
+		#appointments-table th:nth-child(2),
+		#appointments-table td:nth-child(2) {
+			width: 8.9%;
+			/* Adjust the width as needed */
+		}
+
+		#appointments-table th:nth-child(3),
+		#appointments-table td:nth-child(3) {
+			width: 21.3%;
+			/* Adjust the width as needed */
+		}
+
+		#appointments-table th:nth-child(7),
+		#appointments-table td:nth-child(7) {
+			width: 15%;
+			/* Adjust the width as needed */
+		}
+
+
+		/* General table styling */
+		#inventory-table table {
+			width: 100%;
+			border-collapse: collapse;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			/* Center align table text */
+		}
+
+		#inventory-table th,
+		#inventory-table td {
+			border: none;
+			/* Remove border between cells */
+			padding: 8px;
+		}
+
+		/* Header styling */
+		#inventory-table th {
+			background-color: #c32d52;
+			color: white;
+		}
+
+		/* Alternating row colors */
+		#inventory-table tbody tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		/* Hover effect */
+		#inventory-table tbody tr:hover {
+			background-color: #f7d4dc;
+		}
+
+		/* Button styling */
+		#inventory-table form {
+			display: inline-block;
+		}
+
+		/* Use button */
+		#inventory-table .use-button {
+			background-color: #007bff;
+			color: white;
+			border: none;
+			padding: 8px 16px;
+			cursor: pointer;
+			border-radius: 50px;
+			transition: background-color 0.3s ease;
+			/* Smooth transition */
+
+		}
+
+		#inventory-table .use-button:hover {
+			background-color: #0056b3;
+			/* Rounded corners on hover */
+		}
+
+		/* Delete button */
+		#inventory-table .delete-button {
+			background-color: #dc3545;
+			color: white;
+			border: none;
+			padding: 8px 16px;
+			cursor: pointer;
+			border-radius: 50px;
+			transition: background-color 0.3s ease;
+			/* Smooth transition */
+		}
+
+		#inventory-table .delete-button:hover {
+			background-color: #c82333;
+			/* Rounded corners on hover */
+		}
+
+		/* Quantity input */
+		.quantity-input {
+			width: 60px;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			font-size: 16px;
+		}
+
+		.quantity-input:focus {
+			outline: none;
+			border-color: #007bff;
+		}
+
+		/* Adjust styling for different states as needed */
+		.quantity-input:disabled {
+			background-color: #f0f0f0;
+			color: #999;
+		}
+
+		/* General table styling */
+		#rooms-table table {
+			width: 100%;
+			border-collapse: collapse;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		#rooms-table th,
+		#rooms-table td {
+			border: none;
+			padding: 8px;
+			text-align: center;
+			/* Center align table text */
+		}
+
+		/* Header styling */
+		#rooms-table th {
+			background-color: #c32d52;
+			color: white;
+		}
+
+		/* Alternating row colors */
+		#rooms-table tbody tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		/* Hover effect */
+		#rooms-table tbody tr:hover {
+			background-color: #f7d4dc;
+		}
+
+		/* Button styling */
+		#rooms-table form {
+			display: inline-block;
+		}
+
+		/* Occupy button */
+		#rooms-table .occupy-button {
+			background-color: #4caf50;
+			color: white;
+			border: none;
+			padding: 6px 12px;
+			cursor: pointer;
+			border-radius: 50px;
+			/* Rounded corners */
+			transition: background-color 0.3s ease;
+			/* Smooth transition */
+		}
+
+		#rooms-table .occupy-button:hover {
+			background-color: #45a049;
+		}
+
+		/* Unoccupy button */
+		#rooms-table .unoccupy-button {
+			background-color: #ff5252;
+			color: white;
+			border: none;
+			padding: 6px 12px;
+			cursor: pointer;
+			border-radius: 50px;
+			/* Rounded corners */
+			transition: background-color 0.3s ease;
+			/* Smooth transition */
+		}
+
+		#rooms-table .unoccupy-button:hover {
+			background-color: #e04848;
+		}
+
+		/* Adjust styling for different states as needed */
+		#rooms-table .quantity-input {
+			width: 60px;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			font-size: 16px;
+		}
+
+		#rooms-table .quantity-input:focus {
+			outline: none;
+			border-color: #007bff;
+		}
+
+		#rooms-table .quantity-input:disabled {
+			background-color: #f0f0f0;
+			color: #999;
+		}
+
+
+
+		table,
+		td,
+		th,
+		tr {
+			text-align: center;
+		}
+
+
+
+
+		.padding {
+			padding: 3rem !important
+		}
+
+		.user-card-full {
+			overflow: hidden;
+		}
+
+		.card {
+			border-radius: 5px;
+			-webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+			box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+			border: none;
+			margin-bottom: 30px;
+		}
+
+		.m-r-0 {
+			margin-right: 0px;
+		}
+
+		.m-l-0 {
+			margin-left: 0px;
+		}
+
+		.user-card-full .user-profile {
+			border-radius: 5px 0 0 5px;
+		}
+
+		.bg-c-lite-green {
+			background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+			background: linear-gradient(to right, #ee5a6f, #f29263);
+		}
+
+		.user-profile {
+			padding: 20px 0;
+		}
+
+		.card-block {
+			padding: 1.25rem;
+		}
+
+		.m-b-25 {
+			margin-bottom: 25px;
+		}
+
+		.img-radius {
+			border-radius: 5px;
+		}
+
+
+
+		h6 {
+			font-size: 14px;
+		}
+
+		.card .card-block p {
+			line-height: 25px;
+		}
+
+		@media only screen and (min-width: 1400px) {
+			p {
+				font-size: 14px;
+			}
+		}
+
+		.card-block {
+			padding: 1.25rem;
+		}
+
+		.b-b-default {
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		.m-b-20 {
+			margin-bottom: 20px;
+		}
+
+		.p-b-5 {
+			padding-bottom: 5px !important;
+		}
+
+		.card .card-block p {
+			line-height: 25px;
+		}
+
+		.m-b-10 {
+			margin-bottom: 10px;
+		}
+
+		.text-muted {
+			color: #919aa3 !important;
+		}
+
+		.b-b-default {
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		.f-w-600 {
+			font-weight: 600;
+		}
+
+		.m-b-20 {
+			margin-bottom: 20px;
+		}
+
+		.m-t-40 {
+			margin-top: 20px;
+		}
+
+		.p-b-5 {
+			padding-bottom: 5px !important;
+		}
+
+		.m-b-10 {
+			margin-bottom: 10px;
+		}
+
+		.m-t-40 {
+			margin-top: 20px;
+		}
+
+		.user-card-full .social-link li {
+			display: inline-block;
+		}
+
+		.user-card-full .social-link li a {
+			font-size: 20px;
+			margin: 0 10px 0 0;
+			-webkit-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+
+		#profile-table {
+			display: none;
+			background: linear-gradient(90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+			padding: 20px;
+			/* Add padding for better visibility */
+			border-radius: 20px;
+			/* Add border-radius for a smoother appearance */
+		}
+
+
+		.card {
+			background: rgba(255, 255, 255, 0.3);
+			backdrop-filter: blur(10px);
+			/* Apply the blur effect */
+			border-radius: 20px;
+			margin-top: 30px;
+			animation: fadeInUp 1s ease;
+			/* Add animation */
+		}
+
+		.profile-img {
+			border-radius: 50%;
+			width: 150px;
+			height: 150px;
+			object-fit: cover;
+			margin-top: -75px;
+			border: 5px solid rgba(255, 255, 255, 0.5);
+		}
+
+		.card-header {
+			background-color: transparent;
+			border-bottom: none;
+		}
+
+		/* Optional CSS styles */
+		.card-body {
+			color: black;
+		}
+
+		/* Animation keyframes */
+		@keyframes fadeInUp {
+			0% {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		newbody {
+			background: linear-gradient(90deg, hsla(57, 98%, 50%, 1) 0%, hsla(325, 69%, 56%, 1) 100%);
+			background-size: cover;
+			/* background-blur: 10px; */
+		}
+
+		.toast-container {
+			position: fixed;
+			top: 1rem;
+			right: 1rem;
+			z-index: 1000;
+			/* Ensure it's above other content */
+			width: 300px;
+			/* Adjust width as needed */
+		}
+
+		/* Styles for the toast */
+		.toast {
+			display: block;
+			background-color: #fff;
+			border: 1px solid #28a745;
+			/* Success color */
+			border-radius: 0.25rem;
+			box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+			margin-bottom: 0.5rem;
+		}
+
+		/* Styles for the toast header */
+		.toast-header {
+			background-color: #28a745;
+			/* Success color */
+			color: #fff;
+			padding: 0.5rem;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+			border-top-left-radius: 0.25rem;
+			border-top-right-radius: 0.25rem;
+		}
+
+		/* Styles for the toast body */
+		.toast-body {
+			padding: 0.75rem;
+			color: #000;
+			/* Adjust text color as needed */
+		}
+
+		#sidebar a {
+			text-decoration: none;
+		}
+	

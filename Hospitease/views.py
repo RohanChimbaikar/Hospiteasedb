@@ -1,13 +1,11 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import user_passes_test, login_required
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-
 from appointment.models import Appointment, Doctor
 from inventory.models import Product
 from room_mgmt.models import Room
@@ -210,6 +208,7 @@ def doc(request):
         dob=request.user.profile.date_of_birth
         print(dob)
         print(department_info)
+        print(request.user.profile.gender)
         # Add fetched data to the context
         context.update({
             "data": appointments,

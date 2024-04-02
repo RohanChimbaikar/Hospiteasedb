@@ -93,7 +93,7 @@ urlpatterns = [
      path('templates/inventory.html',views.invent,name='invent'),
      #Inventory
      path('add_product/', add_product, name='add_product'),
-    path('edit_product/<int:pk>/', edit_product, name='edit_product'),
+     path('edit_product/<int:pk>/', edit_product, name='edit_product'),
     path('delete_product/<int:pk>/',delete_product, name='delete_product'),
     path('use_product/<int:product_id>/', use_product, name='use_product'),
     

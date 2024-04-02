@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 from django.contrib import messages
+from django.http import JsonResponse
 
 def add_product(request):
     if request.method == 'POST':
@@ -25,19 +26,38 @@ def add_product(request):
 
 
 # views.py
-
-
+def get_product_details(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        try:
+            product = Product.objects.get(id=product_id)
+            # Assuming you have fields like name and description in your Product model
+            data = {
+                'name': product.name,
+                'description': product.description,
+                # Add more fields as needed
+            }
+            return JsonResponse(data)
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'Product not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
+    print(product)
     if request.method == 'POST':
         # Update the product with data from the form
         product.name = request.POST.get('name')
         product.description = request.POST.get('description')
         product.quantity = request.POST.get('quantity')
+        product.price=request.POST.get('price')
         product.save()
-        return redirect('/templates/inventory.html')
-    return render(request, '/templates/inventory.html', {'product': product})
+        # Redirect to the appropriate URL after successful edit
+        return redirect('doc')  # Make sure 'doc' is the correct URL name
+    return render(request, 'docdash.html', {'product': product})
+
+
 
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -56,6 +76,12 @@ def use_product(request, product_id):
         
         # Subtract the use quantity from the product quantity
         product.quantity -= use_quantity
+        
+        # Check if the updated quantity is zero or negative
+        if product.quantity <= 0:
+            product.quantity = 0
+            product.status = 'OUT_OF_STOCK'
+        
         product.save()
         
         # Display a success message
