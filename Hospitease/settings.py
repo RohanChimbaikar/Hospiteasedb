@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'inventory',
     'feedback',
     'Department',
-    'billing'
+    'Billing'
 ]
 
 MIDDLEWARE = [

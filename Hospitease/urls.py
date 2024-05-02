@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from Hospitease import views
-from feedback.views import feedtxt
+from feedback.views import feedback
 from appointment.views import *;
 from Hospitease.views import dash
 from adduser.views import register,logstaff,logout_view
@@ -28,8 +28,7 @@ from django.contrib.auth.views import LoginView
 from inventory.views import add_product, delete_product,edit_product,use_product
 from room_mgmt.views import occupy_room,unoccupy_room,release_room,book_room,room_list
 from register.views import register_usr,login_usr,logout_usr
-from billing.views import create_invoice,create_update_invoice,invoice_detail
-
+from Billing.views import create_invoice,edit_invoice
 # from appointment.views import bkapt
 
 admin.site.site_header="HospitEase"
@@ -93,7 +92,7 @@ urlpatterns = [
      path('templates/inventory.html',views.invent,name='invent'),
      #Inventory
      path('add_product/', add_product, name='add_product'),
-     path('edit_product/<int:pk>/', edit_product, name='edit_product'),
+    path('edit_product/<int:product_id>/', edit_product, name='edit_product'),
     path('delete_product/<int:pk>/',delete_product, name='delete_product'),
     path('use_product/<int:product_id>/', use_product, name='use_product'),
     
@@ -106,12 +105,18 @@ urlpatterns = [
 
 
 
-    #Billing
-    path('invoice/create/', create_update_invoice, name='create_invoice'),
-    path('invoice/update/<int:pk>/', create_update_invoice, name='update_invoice'),
-    path('invoice/<int:pk>/', invoice_detail, name='invoice_detail'),
+   
     path('edit_profile',views.edit_profile,name='edit_profile'),
 
+
+    path('feedback.html/', feedback, name='feedback'),
+
+
+
+    #Billing
+    path('create_invoice/', create_invoice, name='create_invoice'),
+    path('invoice_form.html',views.invoice,name='invoice'),
+    path('edit_invoice/<int:invoice_id>/', edit_invoice, name='edit_invoice'),
 ]
 
 from django.conf import settings

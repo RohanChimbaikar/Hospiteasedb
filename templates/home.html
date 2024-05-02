@@ -80,13 +80,56 @@
       width: 300px;
       z-index: 9999;
     }
+    .testimonial-slider {
+            width: 80%;
+            margin-left: 100px;
+        }
+
+        .testimonial {
+            padding: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .testimonial p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial .author {
+            font-style: italic;
+        }
+
+        .testimonial .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .stars {
+            color: #ffc107; /* Color of filled stars */
+        }
+        .testimonial-slider::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar for WebKit browsers */
+}
+
+.testimonial-slider {
+    overflow-x: hidden; /* Hide the horizontal scrollbar */
+    overflow-y: hidden;
+}
   </style>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
@@ -186,7 +229,15 @@
 
     </div>
   </div>
-
+  <div id="loginSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <!-- Your custom success message will be displayed here -->
+    </div>
+  </div>
   <main>
     <div class="intro">
       <h1>HospitEase</h1>
@@ -200,16 +251,37 @@
         <p class="work-text">Sundays - 9am-3pm<br>
           Saturdays - 9am-6pm<br>
           Weekdays - 9am-9pm
+        </p>
       </div>
       <div class="work">
         <i class="fas fa-atom" style="color: #921919;"></i>
         <p class="work-heading">Events</p>
-        <p class="work-text">7-Feb:Blood Donation Drive <br>
-          9-Feb:Free Physiotherapy Lessions <br>
-          12-Feb:Free eye checkup for kids <br>
+        <p class="work-text">7-Feb: Blood Donation Drive <br>
+          9-Feb: Free Physiotherapy Lessons <br>
+          12-Feb: Free eye checkup for kids <br>
+        </p>
       </div>
+      <!-- Add more work items here -->
+      <div class="work">
+        <i class="fas fa-heartbeat" style="color: #921919;"></i>
+        <p class="work-heading">Health Tips</p>
+        <p class="work-text">Stay hydrated by drinking plenty of water every day. <br>
+          Exercise regularly to maintain a healthy body and mind. <br>
+          Get enough sleep to support your overall well-being. <br>
+        </p>
+      </div>
+      <div class="work">
+        <i class="fas fa-user-md" style="color: #921919;"></i>
+        <p class="work-heading">Specialists</p>
+        <p class="work-text">Cardiologist - Dr. Smith <br>
+          Orthopedic Surgeon - Dr. Johnson <br>
+          Pediatrician - Dr. Williams <br>
+        </p>
+      </div>
+     
     </div>
-    <div class="about-me">
+    
+    <div class="about-me" style="border-bottom: solid 1px rgb(229, 229, 229);">
       <div class="about-me-text">
         <h1 style="color: #AB2848;">Welcome to HospitEase</h1>
         <div class="mission">
@@ -249,6 +321,38 @@
     </div>
   </footer> -->
   <!-- Footer -->
+
+  <h1 style="margin-left: 100px; color: #AB2848; margin-top: 50px;"><i class="fas fa-comments" style="color: #921919;"></i>&nbsp; User Feedback</h1>
+
+  <div class="testimonial-slider" style="width: 40%;">
+    {% for feedback in feedbacks %}
+    <div class="testimonial">
+      {% if feedback.user.profile %}
+      <img class="profile-pic" src="{{ feedback.user.profile.avatar.url }}" alt="Profile Picture">
+  {% else %}
+      <!-- Display default profile image -->
+      <img class="profile-pic" src="/media/profile_pictures/avatar.jpg" alt="Default Profile Picture">
+  {% endif %}
+        <p>"{{ feedback.message }}"</p>
+        <p class="author">{{ feedback.user.get_full_name }}</p>
+        
+        <!-- Add more profile fields as needed -->
+        <div class="stars" data-stars="{{ feedback.stars }}"></div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="testimonial-slider" style="width: 40%;">
+    {% for tip in health_tips %}
+    <div class="testimonial">
+      <img class="profile-pic" src="/media/profile_pictures/health_tip_avatar.jpg" alt="Health Tip Avatar">
+      <p>"{{ tip.message }}"</p>
+      <p class="author">{{ tip.source }}</p>
+      <div class="stars" data-stars="{{ tip.rating }}"></div>
+    </div>
+    {% endfor %}
+  </div>
+  
+
 
   <footer class="text-center text-lg-start bg-body-tertiary text-muted color"
     style="background: linear-gradient(90deg, hsla(312, 77%, 86%, 1) 0%, hsla(220, 61%, 79%, 1) 100%);">
@@ -318,7 +422,7 @@
               <a href="/templates/physio.html" class="text-reset">Physiotherapy</a>
             </p>
             <p>
-              <a href="" class="text-reset">Cardiology</a>
+              <a href="/templates/xray.html" class="text-reset">X-Ray</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -336,11 +440,9 @@
               <a href="/templates/Login.html" class="text-reset">Login</a>
             </p>
             <p>
-              <a href="/templates/facility.html" class="text-reset">Feedback</a>
+              <a href="/feedback.html" class="text-reset">Feedback</a>
             </p>
-            <p>
-              <a href="/templates//help.html" class="text-reset">Help</a>
-            </p>
+            
           </div>
           <!-- Grid column -->
 
@@ -386,7 +488,65 @@
         toast.hide();
       }, 300000);
     }
+      
   </script>
+ {% if success_message %}
+ <script>
+   document.addEventListener('DOMContentLoaded', function () {
+     // Retrieve the success message from the server-side context
+     var successMessage = "{{ success_message }}";
+ 
+     // If there is a success message, display it as a toast
+     if (successMessage) {
+       var toastEl = document.getElementById('loginSuccessToast');
+       var toast = new bootstrap.Toast(toastEl);
+       var toastBody = toastEl.querySelector('.toast-body');
+       toastBody.textContent = "You have logged in sucessfully!";
+       toast.show();
+     }
+   });
+ </script>
+ {% endif %}
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+ <script>
+     $(document).ready(function(){
+            $('.testimonial-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000, // Adjust as needed
+                arrows: false,
+                dots: true
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+    var testimonials = document.querySelectorAll('.testimonial');
+    
+    testimonials.forEach(function(testimonial) {
+        var starsContainer = testimonial.querySelector('.stars');
+        var starsCount = parseInt(starsContainer.getAttribute('data-stars'));
+        displayStars(starsContainer, starsCount);
+    });
+    
+    function displayStars(container, count) {
+    container.innerHTML = '';
+    for (var i = 0; i < count; i++) {
+        var star = document.createElement('i');
+        star.classList.add('fas', 'fa-star', 'star');
+        container.appendChild(star);
+        if (i < count - 1) {
+            var space = document.createElement('span');
+            space.textContent = '\u00A0'; // Add a non-breaking space
+            container.appendChild(space);
+        }
+    }
+}
+
+});
+
+ </script>
   </head>
 </body>
 

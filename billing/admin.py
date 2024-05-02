@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import Invoice, BillingProfile, Item
+from .models import HospitalInvoice,Service
+
 
 # Register your models here.
-
-admin.site.register(Invoice)
-admin.site.register(BillingProfile)
-admin.site.register(Item)
-
+admin.site.register(HospitalInvoice)
+admin.site.register(Service)

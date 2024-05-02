@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
@@ -43,19 +44,26 @@ def get_product_details(request):
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-def edit_product(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    print(product)
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
     if request.method == 'POST':
-        # Update the product with data from the form
+        # Update the product object with the new data from the form
         product.name = request.POST.get('name')
         product.description = request.POST.get('description')
         product.quantity = request.POST.get('quantity')
-        product.price=request.POST.get('price')
+        product.price = request.POST.get('price')
         product.save()
-        # Redirect to the appropriate URL after successful edit
-        return redirect('doc')  # Make sure 'doc' is the correct URL name
-    return render(request, 'docdash.html', {'product': product})
+        # Redirect to the product detail page or any other desired page
+        url = reverse('doc')
+
+    # Append the fragment identifier
+        url_with_fragment = f"{url}#inventory-table"
+
+    # Redirect to the URL with the fragment identifier
+        return redirect(url_with_fragment)
+    else:
+        # Render the edit product page with the product object
+        return render(request, 'edit_product.html', {'product': product})
 
 
 

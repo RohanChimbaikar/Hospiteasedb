@@ -16,18 +16,19 @@
   <div class="row">
     {% for doctor in doctors %}
     <div class="column">
-        <div class="card">
-          <img src="{{ doctor.profile.avatar.url }}" alt="{{ doctor.username }}" style="width:100%">
+        <div class="card" style="display: flex;">
+          <img src="{{ doctor.profile.avatar.url }}" alt="{{ doctor.username }}" style="width: auto; height: 100%; justify-content: center; align-items: center;"  >
+
             <div class="container">
                 <h2>{{ doctor.get_full_name }}</h2>
                 <p class="title">{{ doctor.profile.title }}</p>
                 <p>Contact - {{ doctor.email }}</p>
                 {% if doctor.department_headed %}
-                <p>Head of Department: {{ doctor.department_headed.name }}</p>
+                <p>Head of Department: {{ doctor.department_headed.name|title }}</p>
                 {% else %}
                 <p>Department: 
                     {% for department in doctor.departments.all %}
-                        {{ department.name }}{% if not forloop.last %}, {% endif %}
+                        {{ department.name|title }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </p>
                 {% endif %}

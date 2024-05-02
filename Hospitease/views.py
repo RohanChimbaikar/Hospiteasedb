@@ -1,3 +1,7 @@
+from django.shortcuts import render, redirect
+from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.http import JsonResponse
@@ -7,6 +11,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from appointment.models import Appointment, Doctor
+from feedback.models import Feedback
 from inventory.models import Product
 from room_mgmt.models import Room
 from Department.models import Department
@@ -27,6 +32,7 @@ def profile(request):
 
 def home(request):
     context = {}
+    feedbacks = Feedback.objects.all()
     if request.user.is_authenticated:
         if hasattr(request.user, 'profile') and request.user.profile.avatar:
             context['avatar_url'] = request.user.profile.avatar.url
@@ -37,6 +43,13 @@ def home(request):
         # Check if the user belongs to the 'Doctors' group
         is_doctor = request.user.groups.filter(name='Doctors').exists()
         context['is_doctor'] = is_doctor
+
+        # Retrieve success messages
+        success_messages = [msg.message for msg in messages.get_messages(request)]
+        context['success_message'] = success_messages
+        context['feedbacks'] = feedbacks
+    else:
+        context['feedbacks'] = feedbacks
 
     return render(request, 'home.html', context)
 
@@ -168,10 +181,12 @@ def invent(request):
     products = Product.objects.all()
     return render(request,"templates/docdash.html",{'products': products})
 
-from django.shortcuts import render, redirect
-from django.conf import settings
+from Billing.models import HospitalInvoice
+def get_recent_invoices():
+    # Get the 10 most recent invoices, change the number as needed
+    recent_invoices = HospitalInvoice.objects.order_by('-date')[:6]
+    return recent_invoices
 
-from django.contrib.auth.models import User, Group
 
 @login_required
 @staff_member_required(login_url='/stafflog/')
@@ -209,6 +224,8 @@ def doc(request):
         print(dob)
         print(department_info)
         print(request.user.profile.gender)
+        recent_invoices = get_recent_invoices()
+        invoices = HospitalInvoice.objects.all()
         # Add fetched data to the context
         context.update({
             "data": appointments,
@@ -219,6 +236,9 @@ def doc(request):
             'email_sent': email_sent,
             'reject_sent': reject_sent,
             'department':department_info,
+            'recent_invoices': recent_invoices,
+            'invoices': invoices,
+            
         })
         
         # Render the template with the combined context
@@ -271,28 +291,55 @@ def staffreg(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        email=request.POST.get('email')
-        phone=request.POST.get('phoneNumber')
-        gender=request.POST.get('gender')
+        # Get form data
+        email = request.POST.get('email')
+        phone = request.POST.get('phoneNumber')
+        gender = request.POST.get('gender')
         address = request.POST.get('address')
         medical_school = request.POST.get('medicalSchool')
         date_of_birth = request.POST.get('dateOfBirth')
         license_number = request.POST.get('licenseNumber')
+        profile_image = request.FILES.get('profile_image')  # Get uploaded image
         
         # Update the profile data
         profile = request.user.profile
         profile.gender = gender
-        profile.email=email
-        profile.phone_number=phone
+        profile.email = email
+        profile.phone_number = phone
         profile.address = address
         profile.medical_school = medical_school
         profile.date_of_birth = date_of_birth
         profile.license_number = license_number
+        
+        # Update profile image if provided
+        if profile_image:
+            profile.avatar = profile_image
+        
         profile.save()
-                
+        
         # Redirect to some page after saving changes
         return redirect('doc')  # Redirect to profile page or any other page
     else:
         # Handle GET request, if needed
-        
         return render(request, 'docdash.html', {'success_message': messages.get_messages(request)})
+    
+
+
+def feedback(request):
+    return render(request,"feedback.html")
+from django.contrib.auth.models import User, Group
+from django.shortcuts import render
+
+def invoice(request):
+    # Get the doctors group
+    doctors_group = Group.objects.get(name='doctors')
+    
+    # Get all users who belong to the doctors group
+    doctors = doctors_group.user_set.all()
+    
+    context = {
+        'doctors': doctors,
+        
+    }
+    
+    return render(request, 'invoice_form.html', context)

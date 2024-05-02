@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from .models import Profile
+from django.contrib import messages
 
 def register_usr(request):
     if request.method == 'POST':
@@ -56,15 +57,16 @@ def login_usr(request):
         if user is not None:
             # Log the user in
             login(request, user)
-            # Redirect to the dashboard upon successful login
-            return redirect('home')  # Adjust the URL pattern name for your dashboard
+            # Add success message
+            messages.success(request, 'Logged in successfully!')
+            # Redirect to the homepage upon successful login
+            return redirect('home')  # Adjust the URL pattern name for your homepage
         else:
             # Handle incorrect credentials
             return render(request, 'Login.html', {'error_message': 'Invalid email or password'})
     else:
         # Render the login page for GET requests
         return render(request, 'Login.html')
-
 
 
 def logout_usr(request):

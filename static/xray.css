@@ -16,8 +16,9 @@ header {
 
 #logo {
     display: block;
-    width: 150px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    margin-left: 20px;
+    width: 110px; /* Adjust the size as needed */
+    height: 113px; /* Adjust the size as needed */
 }
 
 .main{

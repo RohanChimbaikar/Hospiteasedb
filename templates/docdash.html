@@ -450,7 +450,7 @@
 
 		#profile-table {
 			display: none;
-			background: linear-gradient(90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+			background: linear-gradient(135deg, #c32d52, #f9b16e);
 			padding: 20px;
 			/* Add padding for better visibility */
 			border-radius: 20px;
@@ -501,7 +501,7 @@
 		}
 
 		newbody {
-			background: linear-gradient(90deg, hsla(57, 98%, 50%, 1) 0%, hsla(325, 69%, 56%, 1) 100%);
+			background: linear-gradient(135deg, #c32d52, #f9b16e);
 			background-size: cover;
 			/* background-blur: 10px; */
 		}
@@ -548,6 +548,10 @@
 		#sidebar a {
 			text-decoration: none;
 		}
+		.wider{
+			width: 190%;
+			margin-left: 91px;
+		}
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
 		integrity="sha512-odq3m15Ea7yBvW3XO8v1vZTnHeF5y8N/fBq94BnWn8Y1zPzJ1A8UJ1VizcDmsF+scQ0l1LmTFnsMmvBN+8FlpA=="
@@ -585,6 +589,13 @@
 				<a href="/templates/docdash.html">
 					<i class='bx bx-id-card'></i>
 					<span class="text">Profile</span>
+				</a>
+			</li>
+			<li>
+				<!-- {% url 'invoice' %} -->
+				<a href="">
+					<i class='bx bx-receipt'></i>
+					<span class="text">Invoice</span>
 				</a>
 			</li>
 			<!-- <li>
@@ -659,7 +670,7 @@
 			<div class="head-title">
 				<div class="left" style="width: 100%;">
 					<!-- <iframe id="hidden-iframe" name="hidden-iframe" style="display: none;"></iframe> -->
-					<div id="appointments-table" style="display: none;">
+					<div id="appointments-table" style="display: block;">
 						<!-- Your appointments table content -->
 						<div class="todo">
 							<table>
@@ -760,7 +771,7 @@
 												<button type="button" class="btn btn-warning btn-sm edit-product-btn" style="font-size: 12px;" data-bs-toggle="modal" data-bs-target="#editProductModal" data-product-id="{{ product.id }}">Edit</button>
 											</div>
 										</form> -->
-										<a href="/edit_product/{{ product.id }}/#inventory-table" class="btn btn-warning btn-sm edit-product-btn" style="font-size: 12px;" data-bs-toggle="modal" data-bs-target="#editProductModal" data-product-id="{{ product.id }}">Edit</a>
+										<a href="{% url 'edit_product' product.id %}#inventory-table" class="btn btn-warning btn-sm edit-product-btn" style="font-size: 12px;">Edit</a>
 										
 										
 										<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
@@ -891,7 +902,7 @@
 								<div class="col-md-8">
 									<div class="card">
 										<div class="card-header text-center">
-											<img src="{{ avatar_url }}" alt="User-Profile-Image" class="profile-img">
+											<img src="{{ avatar_url }}" alt="User-Profile-Image" class="profile-img" style="background-color: #999;">
 											<h3 class="mt-3">{{ request.user.get_full_name }}</h3>
 
 										</div>
@@ -926,6 +937,82 @@
 					</div>
 				</div>
 
+
+				<!-- Billing -->
+
+
+				<div id="bill-table" style="display: none; border: none;" class="newbody">	
+
+				  <div class="container wider">
+					<div class="card">
+						<div class="card-header">
+							<h1 style="padding-top: 26px;">Invoice List <a href="{% url 'create_invoice' %}" class="btn btn-danger" style="float:right; margin-right: 40px; background-color: #ab2848;"><i class='bx bx-plus'></i>&nbsp;&nbsp;Create Invoice</a></h1>
+							
+						</div>
+						<div class="card-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Invoice Number</th>
+										<th>Date</th>
+										<th>Patient Name</th>
+										<th>Associated Doctor</th>
+										<th>Total Amount Due</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Loop through each invoice and display as a table row -->
+										{% for invoice in invoices %}
+										<tr>
+											<td>{{ invoice.invoice_number }}</td>
+											<td>{{ invoice.date }}</td>
+											<td>{{ invoice.patient_name }}</td>
+											<td>{{ invoice.doctor.get_full_name }}</td>
+											<td>{{ invoice.total_amount_due }}</td>
+											<td>
+												<!-- Action buttons -->
+												<a href="{% url 'edit_invoice' invoice.id %}#bill-table" class="btn btn-primary">Edit</a>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+						</div>
+					</div>
+				</div>
+					
+
+
+
+			
+    <div class="card">
+        <div class="card-header">
+            <h4 style="margin-bottom: -13px;">Recent Invoices</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for invoice in recent_invoices %}
+                <li class="list-group-item">
+                    <strong>Invoice Number:</strong> {{ invoice.invoice_number }}<br>
+					<strong>Name:</strong> {{ invoice.patient_name }}<br>
+                    <strong>Date:</strong> {{ invoice.date }}<br>
+                    <!-- Add other invoice details as needed -->
+                </li>
+                {% empty %}
+                <li class="list-group-item">No recent invoices found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+	</div>
+	
+
+
+
+
+
+			</div>
 				<!-- Modal for editing profile -->
 				<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
 					aria-labelledby="editProfileModalLabel" aria-hidden="true">
@@ -938,9 +1025,13 @@
 							<div class="modal-body">
 								<!-- Form for editing profile -->
 								<form id="editProfileForm" action="{% url 'edit_profile' %}#profile-section"
-									method="POST">
+									method="POST" enctype="multipart/form-data">
 									{% csrf_token %}
 									<!-- Input fields for each editable field -->
+									<div class="form-group">
+										<label for="editProfileImage">Profile Image:</label>
+										<input type="file" class="form-control" id="editProfileImage" name="profile_image" style="padding: 7px; height: 44px;"><br>
+										
 									<div class="form-group">
 										<label for="editEmail">Email-address:</label>
 										<input type="email" class="form-control" id="editEmail" name="email"
@@ -1070,11 +1161,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			const inventoryLink = document.querySelector('#sidebar ul.side-menu li:nth-child(2) a');
 			const roomsLink = document.querySelector('#sidebar ul.side-menu li:nth-child(3) a');
 			const profile = document.querySelector('#sidebar ul.side-menu li:nth-child(4) a');
+			const bill = document.querySelector('#sidebar ul.side-menu li:nth-child(5) a');
 			// Get references to the tables
 			const appointmentsTable = document.getElementById('appointments-table');
 			const inventoryTable = document.getElementById('inventory-table');
 			const roomsTable = document.getElementById('rooms-table');
 			const profiletable = document.getElementById('profile-table');
+			const billtable= document.getElementById('bill-table');
+
 			// Add event listeners to the sidebar links
 			appointmentsLink.addEventListener('click', (event) => {
 				// Prevent the default action of the link
@@ -1084,6 +1178,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				inventoryTable.style.display = 'none';
 				roomsTable.style.display = 'none';
 				profiletable.style.display = 'none';
+				billtable.style.display='none';
 			});
 			inventoryLink.addEventListener('click', (event) => {
 				// Prevent the default action of the link
@@ -1093,6 +1188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				inventoryTable.style.display = 'block';
 				roomsTable.style.display = 'none';
 				profiletable.style.display = 'none';
+				billtable.style.display='none';
 			});
 			roomsLink.addEventListener('click', (event) => { // Add this block
 				// Prevent the default action of the link
@@ -1102,6 +1198,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				inventoryTable.style.display = 'none';
 				roomsTable.style.display = 'block';
 				profiletable.style.display = 'none';
+				billtable.style.display='none';
 			});
 			profile.addEventListener('click', (event) => {
 				// Prevent the default action of the link
@@ -1111,7 +1208,21 @@ document.addEventListener('DOMContentLoaded', function() {
 				inventoryTable.style.display = 'none';
 				roomsTable.style.display = 'none';
 				appointmentsTable.style.display = 'none';
+				billtable.style.display='none';
 			});
+
+			bill.addEventListener('click', (event) => {
+				// Prevent the default action of the link
+				event.preventDefault();
+				// Show appointments table and hide others
+				profiletable.style.display = 'none';
+				inventoryTable.style.display = 'none';
+				roomsTable.style.display = 'none';
+				appointmentsTable.style.display = 'none';
+				billtable.style.display='block';
+			});
+
+
 			var currentUrl = window.location.href;
 			// Check if the URL contains a fragment
 			if (currentUrl.includes('#appointments-table')) {
@@ -1130,6 +1241,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				// Show the profile section
 				var profileSection = document.getElementById('profile-table');
 				profileSection.style.display = 'block';
+			}
+			else if (currentUrl.includes('#bill-table')) {
+				// Show the profile section
+				var profileSection = document.getElementById('bill-table');
+				billtable.style.display = 'block';
 			}
 		</script>
 		<script>

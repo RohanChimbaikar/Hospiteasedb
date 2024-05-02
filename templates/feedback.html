@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+	
+    <!-- Custom CSS -->
+    <style>
+        body {
+			background: linear-gradient(90deg, hsla(233, 100%, 90%, 1) 0%, hsla(0, 0%, 89%, 1) 100%);
+        }
+        .feedback-container {
+            margin-top: 50px;
+        }
+        .feedback-form {
+			background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control:focus {
+            box-shadow: none;
+        }
+        .rating {
+            font-size: 20px;
+        }
+        .rating input {
+            display: none;
+        }
+        .rating label {
+            cursor: pointer;
+            color: #ccc; /* Default color */
+        }
+        .rating input:checked ~ label,
+        .rating input:checked ~ label:hover {
+            color: #ffc107; /* Highlight on click and hover */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+		.message h2 {
+            margin-bottom: 20px;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: -30px;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #000 transparent transparent transparent;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+	<div class="container feedback-container position-relative">
+		<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" style="position: absolute; top: 20px; right: -30px; width: 300px; height: 150px;">
+			<div class="toast-header bg-success text-white">
+				<strong class="mr-auto">Success</strong>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<!-- Success message will be displayed here -->
+			</div>
+		</div>
+	</div>
+	
+	
+	
+    <div class="container feedback-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="feedback-form">
+                    <h2 class="text-center mb-4">Feedback Form</h2>
+                    <form method="POST" action="{% url 'feedback' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{user.first_name}}">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{user.last_name}}">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" placeholder="Email Address" value="{{user.email}}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Additional Notes"></textarea>
+                        </div>
+                        <div class="form-group">
+							<h5>Rate Your Experience</h2>
+								<p>Your feedback helps us improve. Please rate your experience below. Thank you!</p>
+                            <div class="rating" style="display: flex; justify-content:space-around;">
+                                <input type="radio" id="star5" name="rating" value="1">
+                                <label for="star5"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="2">
+                                <label for="star4"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="4">
+                                <label for="star2"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="5">
+                                <label for="star1"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn  btn-block" style="background-color: #ab2848; color: white; font-weight: 600;">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+		
+
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript for dynamically updating star colors
+        const rating = document.querySelector('.rating');
+        const stars = rating.querySelectorAll('input');
+        
+        stars.forEach((star, index) => {
+            star.addEventListener('change', (e) => {
+                const selectedRating = parseInt(e.target.value);
+                stars.forEach((s, i) => {
+                    if (i < selectedRating) {
+                        s.nextElementSibling.style.color = '#ffc107'; // Gold color
+                    } else {
+                        s.nextElementSibling.style.color = '#ccc'; // Default color
+                    }
+                });
+            });
+        });
+    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery is optional for Bootstrap toast -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+	<script>
+		// Display toast message
+		var successMessage = "{{ success_message }}";
+		if (successMessage) {
+			$('.toast .toast-body').text(successMessage);
+			$('.toast').toast('show');
+	
+			// Redirect to home page after 5 seconds
+			setTimeout(function() {
+				window.location.href = "{% url 'home' %}";
+			}, 5000);
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Invoice</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+    .wide-container {
+      width: 1500px;
+      margin: 0 auto; /* Center the container */
+    }
+    .invoice-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      margin: 0 auto;
+    }
+    .invoice-header {
+      border-bottom: 2px solid #921919;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .invoice-title {
+      color: #921919;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .invoice-details {
+      color: #333333;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .invoice-field {
+      margin-bottom: 20px;
+    }
+    .add-service-btn {
+      margin-bottom: 10px;
+    }
+    .service-input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .red-line {
+      border-top: 2px solid #921919;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <form method="post" action="{% url 'edit_invoice' invoice.id %}">
+    {% csrf_token %}
+    <div class="wide-container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="invoice-container">
+            <div class="invoice-header">
+              <h2 class="invoice-title" style="margin-bottom: 100px; text-align: center; font-weight:bolder; font-size: 35px">Edit Invoice</h2>
+              <div class="invoice-details">
+                <div class="form-group row">
+                  <label for="date" class="col-sm-2 col-form-label">Date</label>
+                  <div class="col-sm-10">
+                    <input type="date" name="date" class="form-control" id="date" placeholder="May 1, 2024" value="{{ invoice.date|date:'Y-m-d' }}" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="invoiceNumber" class="col-sm-2 col-form-label">Invoice Number</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="invoiceNumber" placeholder="" name="invoiceNumber" value="{{ invoice.invoice_number }}" readonly >
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="patientName" class="col-sm-2 col-form-label">Patient</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="patientName" placeholder="John Doe" name="patient_name" value="{{ invoice.patient_name }}" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="phone_number" class="col-sm-2 col-form-label">Phone Number</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="phone_number" placeholder="Enter a valid phone number" name="phone_number" value="{{ invoice.phone_number }}" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="invoice-body">
+              <div class="invoice-field">
+                <h4>Service Details</h4>
+                <div id="service-details">
+                  {% for service in invoice.services.all %}
+                  <div class="form-group">
+                    <label for="service1" class="sr-only">Service Name</label>
+                    <input type="text" class="form-control service-input" id="service1" placeholder="Service Name" name="services[]" value="{{ service.name }}" required>
+                    <input type="text" class="form-control service-input" id="service1Amount" placeholder="Amount" name="amounts[]" value="{{ service.amount }}" required>
+                  </div>
+                  {% endfor %}
+                </div>
+                <button type="button" class="btn btn-danger add-service-btn" id="addServiceBtn">Add Service</button>
+              </div>
+              <hr class="red-line">
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <select class="form-control" id="doctor" name="doctor" required>
+                    <option value="">Select Doctor</option>
+                    <!-- Include options to select from existing users -->
+                    {% for user in doctors %}
+                      <option value="{{ user.id }}" {% if user.id == invoice.doctor_id %} selected {% endif %}>{{ user.get_full_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="invoice-field">
+                <h4>Total Amount Due ( in &#x20B9; )</h4>
+                <input type="text" class="form-control" id="totalAmountDue" placeholder="" name="totalAmountDue" value="{{ invoice.total_amount_due }}" readonly>
+              </div>
+              <div class="invoice-field">
+                <h4>Payment Instructions</h4>
+                <p>Payment will be cash only.</p>
+              </div>
+              <div class="invoice-field">
+                <h4>Payment Status</h4>
+                <select class="form-control" id="paymentStatus" name="paymentStatus" required>
+                  <option value="Paid" {% if invoice.payment_status == 'Paid' %} selected {% endif %}>Paid</option>
+                  <option value="Unpaid" {% if invoice.payment_status == 'Unpaid' %} selected {% endif %}>Unpaid</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-danger" style="width: 100%; font-weight: 700;">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script>
+    document.getElementById("addServiceBtn").addEventListener("click", function() {
+      // Increment service count
+      var serviceCount = document.querySelectorAll("[id^='service']").length / 2 + 1;
+
+      // Create HTML for new service fields
+      var newServiceHTML = `
+        <div class="form-group">
+          <label for="service${serviceCount}" class="sr-only">Service Name</label>
+          <input type="text" class="form-control service-input" id="service${serviceCount}" placeholder="Service Name" name="services[]">
+          <input type="text" class="form-control service-input" id="service${serviceCount}Amount" placeholder="Amount" name="amounts[]">
+        </div>
+      `;
+
+      // Append new service fields to service details
+      document.getElementById("service-details").insertAdjacentHTML("beforeend", newServiceHTML);
+
+      // Attach event listener to the new service input field for real-time calculation
+      var newServiceInput = document.getElementById("service" + serviceCount + "Amount");
+      newServiceInput.addEventListener("input", calculateTotalAmount);
+
+      // Call calculateTotalAmount function after adding the new service
+      calculateTotalAmount();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Call calculateTotalAmount function initially to set the default total amount
+      calculateTotalAmount();
+    });
+
+    function calculateTotalAmount() {
+      var totalAmount = 0;
+      // Iterate over all service input fields
+      document.querySelectorAll(".service-input").forEach(function(input) {
+        // Check if the input field contains a valid number
+        if (!isNaN(parseFloat(input.value))) {
+          // Add the amount to the total
+          totalAmount += parseFloat(input.value);
+        }
+      });
+      // Update the total amount due input field with the calculated total
+      document.getElementById("totalAmountDue").value = totalAmount.toFixed(2);
+    }
+  
+    // Add event listeners to existing service input fields for real-time calculation of the total amount due
+    document.querySelectorAll(".service-input").forEach(function(input) {
+      input.addEventListener("input", calculateTotalAmount);
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

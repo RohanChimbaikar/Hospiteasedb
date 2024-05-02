@@ -2,11 +2,23 @@ from django.db import models
 
 class Room(models.Model):
     ROOM_TYPES = [
-        ('Regular', 'Regular'),
-        ('ICU', 'Intensive Care Unit'),
-        ('OR', 'Operating Room'),
-        # Add more room types as needed
-    ]
+    ('Regular', 'Regular'),
+    ('ICU', 'Intensive Care Unit'),
+    ('OR', 'Operating Room'),
+    ('Maternity', 'Maternity Room'),
+    ('Pediatric', 'Pediatric Room'),
+    ('Emergency', 'Emergency Room'),
+    ('Isolation', 'Isolation Room'),
+    ('Recovery', 'Recovery Room'),
+    ('Laboratory', 'Laboratory Room'),
+    ('Radiology', 'Radiology Room'),
+    ('Oncology', 'Oncology Room'),
+    ('Hematology', 'Hematology Room'),
+    ('Neurology', 'Neurology Room'),
+    ('Cardiology', 'Cardiology Room'),
+    ('Psychiatric', 'Psychiatric Room'),
+]
+
 
     number = models.CharField(max_length=20, unique=True)
     room_type = models.CharField(max_length=20, choices=ROOM_TYPES,default="Regular")
